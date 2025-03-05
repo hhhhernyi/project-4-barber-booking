@@ -3,6 +3,8 @@ import HomeView from "../Views/HomeView.vue";
 import ServicesView from "../Views/ServicesView.vue";
 import BookAppointmentLogin from "../Views/BookAppointmentLoginView.vue";
 import LogInView from "../Views/LogInView.vue";
+import SignUpView from "../Views/SignUpView.vue";
+import AdminLogInView from "../Views/AdminLogInView.vue";
 
 const router = createRouter(
     {
@@ -27,6 +29,16 @@ const router = createRouter(
                 path:'/auth/login',
                 name: 'loginPage',
                 component: LogInView
+            },
+            {
+                path:'/auth/admin-login',
+                name: 'adminLogInPage',
+                component: AdminLogInView
+            },
+            {
+                path:'/auth/signup',
+                name: 'signupPage',
+                component: SignUpView
             },
         ],
     },

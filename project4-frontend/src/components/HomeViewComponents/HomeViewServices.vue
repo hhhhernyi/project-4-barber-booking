@@ -1,14 +1,23 @@
 <script setup></script>
 
 <template>
-  <div class="flex flex-col w-full h-[800px] border-[2px] justify-center items-center">
-    <div class="text-darkBrown text-2xl flex flex-col items-center">
-      <h1>20 YEARS</h1>
-      <h2>IN PROFESSIONAL HAIR SERVICES</h2>
+<div class="w-full h-[500px] border-[2px] my-2">
+    <div class="flex flex-col items-center text-m md:text-2xl md:flex-row md:mx-10">
+        <div class="mx-5 text-darkBrown">SERVICES PROVIDED AT</div>
+        <div class="flex bg-black w-auto justify-center p-1 rounded-2xl ">
+            <p class="text-red m-1">CUT </p>
+            <p class="text-white m-1">. </p>
+            <p class="text-yellow m-1">STYLE </p>
+            <p class="text-white m-1">. </p>
+            <p class="text-blue m-1">PERM</p>
+        </div>
     </div>
-    <div class="mt-5">
-      <button class="border-[2px] m-3 p-2 rounded-2xl bg-brown text-white">View services</button>
-      <button class="border-[2px] m-3 p-2 rounded-2xl bg-brown text-white">Book Appointment now</button>
+    <div class="flex flex-col md:flex-row items-center justify-center">
+        <div>item1</div>
+        <div>item2</div>
+        <div>item3</div>
+        <div>item4</div>
+
     </div>
-  </div>
+</div>
 </template>
