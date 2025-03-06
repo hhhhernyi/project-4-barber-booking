@@ -1,0 +1,23 @@
+meta {
+  name: Create appointment
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/book-appointment
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "fullName":"LHY",
+      "mobileNumber":"99990000",
+      "service": "cut",
+      "date":"2025-03-13",
+      "time":"1130-1200",
+      "status": "pending"
+  }
+  
+}
