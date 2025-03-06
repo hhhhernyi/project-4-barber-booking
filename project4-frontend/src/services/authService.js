@@ -29,6 +29,9 @@ async function signUp(formData) {
     throw new Error(err);
   }
 };
+async function signIn() {
+  console.log('test')
+}
 
 export {
     signUp,
