@@ -13,8 +13,7 @@ function handleSubmitSignUp() {
 </script>
 
 <template>
-    <h1>Form to Login to account</h1>
-    <div class="w-full h-[1000px] flex justify-center items-center">
+    <div class="w-full h-[700px] flex justify-center items-center">
             <form @submit.prevent="handleSubmitSignUp">
             <label>Email: </label>
             <input type="email" class="bg-white border-[2px]"></input><br/>

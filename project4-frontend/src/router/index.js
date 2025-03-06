@@ -5,6 +5,7 @@ import BookAppointmentLogin from "../Views/BookAppointmentLoginView.vue";
 import LogInView from "../Views/LogInView.vue";
 import SignUpView from "../Views/SignUpView.vue";
 import AdminLogInView from "../Views/AdminLogInView.vue";
+import BookAppointmentView from "../Views/BookAppointmentView.vue";
 
 const router = createRouter(
     {
@@ -39,6 +40,11 @@ const router = createRouter(
                 path:'/auth/signup',
                 name: 'signupPage',
                 component: SignUpView
+            },
+            {
+                path:'/book-appointment',
+                name: 'bookApptPage',
+                component: BookAppointmentView
             },
         ],
     },

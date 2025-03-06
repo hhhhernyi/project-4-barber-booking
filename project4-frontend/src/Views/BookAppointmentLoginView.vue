@@ -1,7 +1,7 @@
 <script setup>
+import BookAppointmentLogInViewComponent from '../components/BookAppointmentLogInViewComponent/BookAppointmentLogInViewComponent.vue';
 </script>
 
 <template>
-
-    <p> see a form to log in or continue as guest</p>
+    <BookAppointmentLogInViewComponent/>
 </template>
