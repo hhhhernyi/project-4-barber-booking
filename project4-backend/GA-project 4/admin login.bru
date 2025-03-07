@@ -1,0 +1,19 @@
+meta {
+  name: admin login
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:3000/auth/login-admin
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "kimhair@gmail.com",
+    "password": "kikim123"
+  }
+  
+}

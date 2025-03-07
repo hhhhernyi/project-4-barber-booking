@@ -11,8 +11,6 @@ const saltRounds = 12;
 
 
 // this route is to sign up a new user
-// steps taken:
-
 router.post('/signup', async (req, res) => {
   try {
     const userInDatabase = await User.findOne({ email: req.body.email }); // firstly, using the user schema/model .findOne(), find if the email sent in the req.body is already present
@@ -30,11 +28,59 @@ router.post('/signup', async (req, res) => {
             points: 0,
             admin: req.body.admin
             });
-    const payload = { email: user.email, _id: user._id }; // extract the username and id of the user and save to a variable named payload
+    const payload = { email: user.email, _id: user._id }; // extract the email and id of the user and save to a variable named payload
     const token = jwt.sign({ payload }, process.env.JWT_SECRET); // create a jwt token using this payload and the secret key in the .env file
     res.status(201).json({ token }); // return this key to the user as a response when user is successfully created
     }
 
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+});
+
+
+// this route is to sign in a existing user
+router.post('/login-user', async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email, admin: false }); // search the database for any existing email
+    if (!user) {
+      return res.status(401).json({ err: 'Invalid credentials.' });
+    }
+
+    const isPasswordCorrect = bcrypt.compareSync(req.body.password,user.hashedPassword); // compare if the user entered password is same as the one in database
+    if (!isPasswordCorrect) {
+      return res.status(401).json({ err: 'Invalid credentials.' }); // password wrong
+    }
+
+    const payload = { email: user.email, _id: user._id };
+
+    const token = jwt.sign({ payload }, process.env.JWT_SECRET);
+
+    res.status(200).json({ token });
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+});
+
+
+// this route is to sign in a admin
+router.post('/login-admin', async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email, admin: true }); // search the database for any existing email for admin true
+    if (!user) {
+      return res.status(401).json({ err: 'Invalid credentials.' });
+    }
+
+    const isPasswordCorrect = bcrypt.compareSync(req.body.password,user.hashedPassword); // compare if the user entered password is same as the one in database
+    if (!isPasswordCorrect) {
+      return res.status(401).json({ err: 'Invalid credentials.' }); // password wrong
+    }
+
+    const payload = { email: user.email, _id: user._id };
+
+    const token = jwt.sign({ payload }, process.env.JWT_SECRET);
+
+    res.status(200).json({ token });
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
