@@ -1,4 +1,7 @@
-<script setup></script>
+<script setup>
+import { RouterLink } from 'vue-router';
+
+</script>
 
 <template>
   <div class="flex flex-col w-full h-[800px] border-[2px] justify-center items-center">
@@ -7,8 +10,8 @@
       <h2>IN PROFESSIONAL HAIR SERVICES</h2>
     </div>
     <div class="mt-5">
-      <button class="border-[2px] m-3 p-2 rounded-2xl bg-brown text-white">View services</button>
-      <button class="border-[2px] m-3 p-2 rounded-2xl bg-brown text-white">Book Appointment now</button>
+      <RouterLink to="/services"><button class="border-[2px] m-3 p-2 rounded-2xl bg-brown text-white cursor-pointer">View services</button></RouterLink>
+      <RouterLink to="/auth/login-booking"><button class="border-[2px] m-3 p-2 rounded-2xl bg-brown text-white cursor-pointer">Book Appointment now</button></RouterLink>
     </div>
   </div>
 </template>
