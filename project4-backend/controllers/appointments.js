@@ -1,4 +1,4 @@
-// all URL here begin with /book-appointment
+// all URL here begin with /appointment
 
 const verifyToken = require('../middleware/verify-token');
 const Appointment = require('../models/appointment')
@@ -18,5 +18,24 @@ router.post("/", async (req, res) => {
       res.status(500).json({ err: err.message });
     }
   });
+
+  router.get("/pending", async (req, res) => {
+    try {
+      const allPendingAppointments = await Appointment.find({status: "pending"}); 
+      res.status(201).json(allPendingAppointments);
+    } catch (err) {
+      res.status(500).json({ err: err.message });
+    }
+  });
+
+  router.get("/confirmed", async (req, res) => {
+    try {
+      const allConfirmedAppointments = await Appointment.find({status: "confirmed"}); 
+      res.status(201).json(allConfirmedAppointments);
+    } catch (err) {
+      res.status(500).json({ err: err.message });
+    }
+  });
+
 
   module.exports = router;

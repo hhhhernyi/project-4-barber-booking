@@ -52,7 +52,7 @@ router.post('/login-user', async (req, res) => {
       return res.status(401).json({ err: 'Invalid credentials.' }); // password wrong
     }
 
-    const payload = { email: user.email, _id: user._id };
+    const payload = { email: user.email, _id: user._id, admin: false };
 
     const token = jwt.sign({ payload }, process.env.JWT_SECRET);
 
@@ -76,7 +76,7 @@ router.post('/login-admin', async (req, res) => {
       return res.status(401).json({ err: 'Invalid credentials.' }); // password wrong
     }
 
-    const payload = { email: user.email, _id: user._id };
+    const payload = { email: user.email, _id: user._id, admin: true };
 
     const token = jwt.sign({ payload }, process.env.JWT_SECRET);
 

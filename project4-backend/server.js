@@ -23,7 +23,7 @@ app.use(logger('dev'));
 
 // Routes go here
 app.use('/auth', authRouter);
-app.use('/book-appointment', appointmentRouter);
+app.use('/appointment', appointmentRouter);
 
 app.listen(3000, () => {
   console.log('The express app is ready!');
