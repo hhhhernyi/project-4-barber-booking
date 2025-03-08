@@ -37,5 +37,16 @@ router.post("/", async (req, res) => {
     }
   });
 
+  // update the appointment to be confirmed
+  router.put("/pending/:appointmentId", async (req, res) => {
+    try {
+      const appointmentId = req.params.appointmentId
+      const updateStatus = req.body
+      const updatedAppointment = await Appointment.findByIdAndUpdate(appointmentId, updateStatus, {new:true}); 
+      res.status(201).json(updatedAppointment);
+    } catch (err) {
+      res.status(500).json({ err: err.message });
+    }
+  });
 
   module.exports = router;

@@ -1,0 +1,23 @@
+meta {
+  name: confrim pending appointment
+  type: http
+  seq: 8
+}
+
+get {
+  url: http://localhost:3000/appointment/pending
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "fullName":"XYZ",
+      "mobileNumber":"99991234",
+      "service": "treatment",
+      "date":"2025-03-13",
+      "time":"1130-1200",
+      "status": "pending"
+  }
+  
+}
