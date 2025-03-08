@@ -1,12 +1,13 @@
 <script setup>
 //IMPORT
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 import { reactive } from 'vue';
 import * as authService from '../../services/authService'
 import { useToast } from 'vue-toastification';
 
 // CONSTANTS
 const toast = useToast();
+const router = useRouter();
 const formData = reactive({
     email:'',
     password:''
@@ -21,6 +22,7 @@ async function handleSubmitSignIn() {
         const loggedInUser = await authService.logInUser(formData)
         console.log('user logged in: ', loggedInUser)
         toast.success('Welcome!')
+        router.push('/member/home')
     } catch (error) {
         console.log(error)
         toast.error('Invalid credentials')

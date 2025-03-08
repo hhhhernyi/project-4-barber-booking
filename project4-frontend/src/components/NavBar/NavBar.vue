@@ -26,7 +26,7 @@ function toggleSmallNavBar() {
 
 <template>
   <div
-    class="flex w-[80%] max-w-[1500px] border-[2px] h-[100px] mt-5 mx-auto rounded-xl justify-around items-center bg-brown text-white fixed right-0 left-0"
+    class="flex w-[80%] max-w-[1500px] border-[2px] h-[100px] mt-5 mx-auto z-1 rounded-xl justify-around items-center bg-brown text-white fixed right-0 left-0"
   >
     <div><RouterLink to="/"><i class="pi pi-image mt-1"></i></RouterLink></div>
     <div class="flex justify-around w-[70%] sm:hidden md:flex">

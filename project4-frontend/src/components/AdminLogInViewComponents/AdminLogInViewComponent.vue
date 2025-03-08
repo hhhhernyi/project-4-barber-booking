@@ -1,6 +1,6 @@
 <script setup>
 //IMPORT
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 
 import { reactive } from 'vue';
 import * as authService from '../../services/authService'
@@ -8,6 +8,7 @@ import { useToast } from 'vue-toastification';
 
 // CONSTANTS
 const toast = useToast();
+const router = useRouter();
 const formData = reactive({
     email:'',
     password:''
@@ -22,6 +23,7 @@ async function handleSubmitSignUp() {
         const loggedInAdmin = await authService.logInAdmin(formData)
         console.log('logged in admin: ', loggedInAdmin)
         toast.success('welcome admin')
+        router.push('/admin/home')
 
     } catch (error) {
         console.log(error)

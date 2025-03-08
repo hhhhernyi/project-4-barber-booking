@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router';
 </script>
 
 <template>
-  <div class="flex md:flex-row sm:flex-col-reverse w-full h-[800px] border-[2px] justify-around items-center">
+  <div class="flex md:flex-row sm:flex-col-reverse w-full h-[800px] justify-around items-center">
     <div>
       <div>Your Perfect Cut Awaits </div>
       <div> Experience the Best in Grooming!</div>

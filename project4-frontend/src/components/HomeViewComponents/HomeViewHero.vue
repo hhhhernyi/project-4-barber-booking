@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router';
 </script>
 
 <template>
-  <div class="flex flex-col w-full h-[800px] border-[2px] justify-center items-center">
+  <div class="flex flex-col w-full h-[800px] justify-center items-center">
     <div class="text-darkBrown text-2xl flex flex-col items-center">
       <h1>20 YEARS</h1>
       <h2>IN PROFESSIONAL HAIR SERVICES</h2>
