@@ -7,8 +7,6 @@ console.log(decoded.payload.admin)
 </script>
 
 <template>
-    
-    <h1>admin home page to see all the stuff</h1>
     <div v-if="isAdmin">
         <AdminHomeDashboard />
     </div>

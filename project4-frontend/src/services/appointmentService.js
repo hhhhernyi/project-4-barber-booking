@@ -43,8 +43,24 @@ async function viewConfirmedAppointments() {
         console.log(err);
     }
 }
+// confirm a pending appointment
+async function confirmPendingAppointment(appointmentId) {
+    try {
+        const res = await fetch(BASE_URL+`/pending/${appointmentId}`, {
+            method: 'PUT',
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({ status: "confirmed" }),
+          });
+          return  res.json();
+    } catch (err) {
+        console.log(err);
+    }
+}
 export {
     createAppointment,
     viewPendingAppointments,
-    viewConfirmedAppointments
+    viewConfirmedAppointments,
+    confirmPendingAppointment
   };
