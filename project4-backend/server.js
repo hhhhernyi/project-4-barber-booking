@@ -9,6 +9,7 @@ const logger = require('morgan');
 // Import routers
 const authRouter = require('./controllers/auth');
 const appointmentRouter = require('./controllers/appointments')
+const userRouter = require('./controllers/user')
 
 // connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI);
@@ -24,6 +25,7 @@ app.use(logger('dev'));
 // Routes go here
 app.use('/auth', authRouter);
 app.use('/appointment', appointmentRouter);
+app.use('/users', userRouter);
 
 app.listen(3000, () => {
   console.log('The express app is ready!');

@@ -1,18 +1,22 @@
 meta {
-  name: Create appointment
+  name: view single user
   type: http
-  seq: 3
+  seq: 9
 }
 
-post {
-  url: http://localhost:3000/appointment
+get {
+  url: http://localhost:3000/users/:userId
   body: json
   auth: none
 }
 
+params:path {
+  userId: 67c98c5c928f66d89ae84c20
+}
+
 body:json {
   {
-      "fullName":"LEE",
+      "fullName":"XYZ",
       "mobileNumber":"99991234",
       "service": "treatment",
       "date":"2025-03-13",

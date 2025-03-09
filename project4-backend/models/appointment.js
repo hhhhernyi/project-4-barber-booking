@@ -26,7 +26,7 @@ const appointmentSchema = new mongoose.Schema(
     status: {
       type: String,
       required: true,
-      enum: ["pending", "confirmed"],
+      enum: ["pending", "confirmed", "completed"],
     },
     customer: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
