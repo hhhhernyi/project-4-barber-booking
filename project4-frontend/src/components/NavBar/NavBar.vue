@@ -2,15 +2,14 @@
 // IMPORTS
 import { RouterLink } from "vue-router";
 import { useRouter } from "vue-router";
-import { ref } from "vue";
+import { onMounted, onUpdated, reactive, ref } from "vue";
 import { useToast } from "vue-toastification";
 
 
 // CONSTANTS
 const router = useRouter();
 const toast = useToast();
-
-const token = localStorage.getItem('token')
+const token = reactive(localStorage.getItem('token')) 
 
     
 
@@ -18,11 +17,16 @@ const token = localStorage.getItem('token')
 // VARIABLES
 const showSmallNavBar = ref(false);
 let adminStatus=false;
+let userId=''
+
 if (token) {
   const decoded = JSON.parse(atob(token.split('.')[1]));
   adminStatus = decoded.payload.admin
-    console.log(decoded.payload.admin) // i can check for admin status here
+  userId = decoded.payload._id
+  console.log(decoded.payload.admin, userId) // i can check for admin status here
 }
+// STATE
+
 
 // FUNCTIONS
 
@@ -35,7 +39,6 @@ function toggleSmallNavBar() {
 function handleLogout() {
   localStorage.clear()
   toast.success("Logged Out")
-  router.push('/')
 }
 
 
@@ -49,11 +52,15 @@ function handleLogout() {
     <div class="flex justify-around w-[70%] sm:hidden md:flex">
       <div v-if="token">
         <div v-if="adminStatus===true"><RouterLink to="/admin/home"><p class="border-[2px] p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Admin</p ></RouterLink></div>
-        <div v-else="adminStatus===false"><RouterLink to="/member/home"><p class="border-[2px] p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Member</p ></RouterLink></div>
+        <div v-else="adminStatus===false"><RouterLink :to="`/member/${userId}`"><p class="border-[2px] p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Account</p ></RouterLink></div>
       </div>
       <RouterLink to="/"><p class="border-[2px] p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Home</p></RouterLink>
       <RouterLink to="/services"><p  class="border-[2px] p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Services</p></RouterLink>
-      <RouterLink to="/auth/login-booking"><p class="border-[2px] p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Book Appointment</p></RouterLink>
+      <div>
+        <RouterLink v-if="token" to="/book-appointment"><p class="border-[2px] p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Book Appointment</p></RouterLink>
+        <RouterLink v-else="!token" to="/auth/login-booking"><p class="border-[2px] p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Book Appointment</p></RouterLink>
+      </div>
+      
       <div>
         <RouterLink v-if="!token" to="/auth/login"><p class="border-[2px] p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Login</p ></RouterLink>
         <RouterLink v-else="token" to="/"><p @click="handleLogout" class="border-[2px] p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Logout</p ></RouterLink>

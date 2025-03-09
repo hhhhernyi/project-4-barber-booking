@@ -1,9 +1,25 @@
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/appointment`;
 
-// create a new appointment
-async function createAppointment(bookingFormData) {
+// create a new appointment for guest
+async function createAppointmentGuest(bookingFormData) {
     try {
-        const res = await fetch(BASE_URL, {
+        const res = await fetch(BASE_URL+'/guest', {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify(bookingFormData),
+          });
+          return  res.json();
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+// create a new appointment for member
+async function createAppointmentMember(bookingFormData) {
+    try {
+        const res = await fetch(BASE_URL+'/member', {
             method: 'POST',
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}`,
             'Content-Type': 'application/json',
@@ -59,7 +75,8 @@ async function confirmPendingAppointment(appointmentId) {
     }
 }
 export {
-    createAppointment,
+    createAppointmentGuest,
+    createAppointmentMember,
     viewPendingAppointments,
     viewConfirmedAppointments,
     confirmPendingAppointment

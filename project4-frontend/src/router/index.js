@@ -61,7 +61,7 @@ const router = createRouter(
                 meta: { requiresAuth: true },
             },
             {
-                path:'/member/home',
+                path:'/member/:userId',
                 name: 'memberDashboard',
                 component: MemberHomeView,
             },

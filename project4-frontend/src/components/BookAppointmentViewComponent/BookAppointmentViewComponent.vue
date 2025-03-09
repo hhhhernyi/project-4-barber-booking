@@ -7,6 +7,7 @@ import * as appointmentService from '../../services/appointmentService';
 // CONSTANTS
 const toast = useToast();
 const router = useRouter();
+const token = localStorage.getItem('token');
 const availableHours = [
     '1030-1100',
     '1100-1130',
@@ -29,7 +30,7 @@ const formData = reactive({
     fullName:"",
     mobileNumber:'',
     service: '',
-    date:'',
+    date: Date,
     time:'',
     status: "pending"
 })
@@ -45,12 +46,22 @@ async function handleSubmitAppointment() {
         toast.error('Please fill up all fields!')
     } else {
         try {
-            const pendingAppt = await appointmentService.createAppointment(formData);
-            console.log(pendingAppt)
-            toast.success('Appointment is booked! please wait for confirmation');
-            router.push('/')
+            if (token) {
+                console.log('form data: ', formData)
+                const pendingAppt = await appointmentService.createAppointmentMember(formData);
+                console.log(pendingAppt)
+                toast.success('Appointment is booked! please wait for confirmation');
+                router.push('/')
+            } else {
+                console.log('form data: ', formData)
+                const pendingAppt = await appointmentService.createAppointmentGuest(formData);
+                console.log(pendingAppt)
+                toast.success('Appointment is booked! please wait for confirmation');
+                router.push('/')
+            }
+            
         } catch (error) {
-            console.log(error)
+            console.log('error message: ',error)
         }
     }
 }

@@ -1,6 +1,6 @@
 <script setup>
+import MemberViewComponent from '../components/MemberViewComponents/MemberViewComponent.vue';
 </script>
 <template>
-
-    <h1>Welcome to members home</h1>
+    <MemberViewComponent />
 </template>
