@@ -43,9 +43,9 @@ function handleLogout() {
 
 <template>
   <div
-    class="flex w-[80%] max-w-[1500px] border-[2px] h-[100px] mt-5 mx-auto z-1 rounded-xl justify-around items-center bg-brown text-white fixed right-0 left-0"
+    class="flex w-[80%] max-w-[1500px] border-[2px] h-[100px] mt-5 mx-auto z-1 rounded-xl justify-around items-center bg-brown border-brown text-white fixed right-0 left-0"
   >
-    <div><RouterLink to="/"><i class="pi pi-image mt-1"></i></RouterLink></div>
+    <div><RouterLink to="/"><img src="../../assets/images/logo.png" class="rounded-[30%] h-[80px] w-[80px]"/></RouterLink></div>
     <div class="flex justify-around w-[70%] sm:hidden md:flex">
       <div v-if="token">
         <div v-if="adminStatus===true"><RouterLink to="/admin/home"><p class="border-[2px] p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Admin</p ></RouterLink></div>

@@ -1,5 +1,27 @@
 <script setup>
 import { RouterLink } from 'vue-router';
+const services = [
+    {
+        service: 'Cut',
+        description: 'cut hair',
+        image:''
+    },
+    {
+        service: 'Color',
+        description: 'Color hair',
+        image:''
+    },
+    {
+        service: 'Perm',
+        description: 'Perm hair',
+        image:''
+    },
+    {
+        service: 'Treatment',
+        description: 'Treat hair',
+        image:''
+    },
+]
 
 </script>
 
@@ -16,43 +38,43 @@ import { RouterLink } from 'vue-router';
         </div>
     </div>
     <div class="flex flex-col md:flex-row items-center justify-around p-2">
-        <div class="flex flex-col sm:w-[80%] m-2 border-[1px]">
-            <div>
-                <img src="../../assets/images/homeServiceCutImage.jpg" alt="cutting hair" class="rounded-3xl"/>
-            </div>
-            <div>
+        <div class="flex flex-col md:w-[25%] md:h-[400px] sm:w-[80%] m-2  items-center">
+            
+                <img src="../../assets/images/homeServiceCutImage.jpg" alt="cutting hair" class="rounded-3xl w-[300px] h-[200px] object-cover"/>
+            
+            <div class="flex flex-col items-center">
                 <div class="text-3xl">Cut</div>
                 <div class="text-sm">Freshen up your look with a precision haircut tailored to suit your personal style. Whether you're going for a classic cut or something modern, our expert barbers take the time to craft a haircut that complements your features and leaves you feeling sharp and confident. From fades to buzz cuts, we’ve got you covered!</div>
             </div>
         </div>
 
-        <div class="flex flex-col sm:w-[80%] m-2 border-[1px]">
-            <div>
-                <img src="../../assets/images/homeServiceColorImage.jpg" alt="Coloring hair" class="rounded-3xl"/>
-            </div>
-            <div>
+        <div class="flex flex-col md:w-[25%] md:h-[400px] sm:w-[80%] m-2  items-center">
+           
+                <img src="../../assets/images/homeServiceColorImage.jpg" alt="Coloring hair" class="rounded-3xl w-[300px] h-[200px] object-cover"/>
+            
+            <div class="flex flex-col items-center">
                 <div class="text-3xl">Color</div>
                 <div class="text-sm">Add some color to your life with a hair coloring service designed just for you. Whether you're looking to brighten up your natural shade, go bold with a new hue, or add some highlights for dimension, our color experts will create a look that enhances your style and gives you that refreshed, vibrant appearance.</div>
             </div>
         </div>
 
-        <div class="flex flex-col sm:w-[80%] m-2 border-[1px]">
-            <div>
-                <img src="../../assets/images/homeServicePermImage.jpeg" alt="perm hair" class="rounded-3xl"/>
-            </div>
-            <div>
+        <div class="flex flex-col md:w-[25%] md:h-[400px] sm:w-[80%] m-2  items-center">
+            
+                <img src="../../assets/images/homeServicePermImage.jpeg" alt="perm hair" class="rounded-3xl w-[300px] h-[200px] object-cover"/>
+            
+            <div class="flex flex-col items-center">
                 <div class="text-3xl">Perm</div>
-                <div class="text-sm">Get those gorgeous curls or waves with our professional perming service! If you're looking to add volume, texture, or curl to your hair, our stylists use advanced perming techniques to create lasting results. Whether you want tight curls or loose waves, we’ll work with you to achieve the perfect look that’s full of life and movement.</div>
+                <div class="text-sm">Get those gorgeous curls or waves with our perming service! If you're looking to add volume, texture, or curl to your hair, our stylists use advanced perming techniques to create lasting results.We’ll work with you to achieve the perfect look that’s full of life and movement.</div>
             </div>
         </div>
 
-        <div class="flex flex-col sm:w-[80%] m-2 border-[1px]">
-            <div>
-                <img src="../../assets/images/homeServiceTreatmentImage.png" alt="perm hair" class="rounded-3xl"/>
-            </div>
-            <div>
+        <div class="flex flex-col md:w-[25%] md:h-[400px] sm:w-[80%] m-2  items-center">
+            
+                <img src="../../assets/images/homeServiceTreatmentImage.png" alt="treat hair" class="rounded-3xl w-[300px] h-[200px] object-fill"/>
+           
+            <div class="flex flex-col items-center">
                 <div class="text-3xl">Treatment</div>
-                <div class="text-sm">Nourish and rejuvenate your hair with a luxurious hair treatment. From deep conditioning to restoring shine and softness, our treatments are designed to repair and revitalize your hair, leaving it healthier and more manageable. Perfect for dry, damaged, or color-treated hair, these treatments give your locks the TLC they deserve.</div>
+                <div class="text-sm">Nourish and rejuvenate your hair with a luxurious hair treatment. From deep conditioning to restoring shine and softness, our treatments are designed to  revitalize your hair, leaving it healthier and more manageable. Perfect for dry, damaged, or color-treated hair.</div>
             </div>
         </div>
 
