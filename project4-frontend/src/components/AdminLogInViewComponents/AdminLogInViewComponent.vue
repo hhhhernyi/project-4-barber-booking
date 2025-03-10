@@ -43,7 +43,7 @@ async function handleSubmitSignUp() {
             <label for="password">Password: </label>
             <input is="password" name="password" v-model="formData.password" placeholder="Password" type="password" class="bg-white border-[2px] px-2 rounded-xl"></input><br/>
 
-            <button type="submit" class="border-[2px] p-2 rounded-2xl cursor-pointer active:bg-amber-400">Log In</button>
+            <button type="submit" class="bg-brown border-[2px] p-2 rounded-2xl cursor-pointer active:bg-amber-400">Log In</button>
         </form>
         </div>
         

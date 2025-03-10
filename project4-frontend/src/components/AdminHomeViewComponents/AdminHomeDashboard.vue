@@ -24,6 +24,8 @@ onMounted(async ()=>{
     const pendingApptsResponse = await appointmentService.viewPendingAppointments();
     pendingAppointment.value = pendingApptsResponse;
     confirmedAppointment.value = confirmApptsResponse;
+    console.log(pendingAppointment)
+    console.log(confirmedAppointment)
 
   } catch (error) {
     console.log(error)
@@ -31,8 +33,9 @@ onMounted(async ()=>{
   }
 })
 // FUNCTIONS
-async function confirmAppt(itemID) {
+async function confirmAppt(itemID, email) {
     console.log('appointment confirmed for: ', itemID)
+    console.log('Email sent to: ', email)
     try {
       const updatedAppoinmentStatus = await appointmentService.confirmPendingAppointment(itemID)
       console.log("updated: ", updatedAppoinmentStatus)
@@ -46,8 +49,9 @@ async function confirmAppt(itemID) {
     }
 }
 
-function completeAppt(itemID) {
+function completeAppt(itemID, customer) {
   console.log("appointment completed: ",itemID)
+  console.log('points added to: ', customer)
 }
 
 
@@ -62,7 +66,7 @@ function completeAppt(itemID) {
       <div class="border-[2px] m-2">
         <h2>Pending Appointments</h2>
         <ul>
-            <li v-for="item in pendingAppointment">{{ item.fullName }} {{ item.service }} {{ item.date }} {{ item.time }}<button @click="confirmAppt(item._id)"  class="border-[2px] p-2 rounded-2xl bg-white">confirm appointment?</button></li>
+            <li v-for="item in pendingAppointment">{{ item.fullName }} {{ item.service }} {{ item.date }} {{ item.time }}<button @click="confirmAppt(item._id, item.email)"  class="border-[2px] p-2 rounded-2xl bg-white">confirm appointment?</button></li>
         </ul>
 
       </div>
@@ -72,7 +76,7 @@ function completeAppt(itemID) {
         <h2>Confirmed Appointments</h2>
         
         <ul>
-            <li v-for="item in confirmedAppointment">{{ item.fullName }} {{ item.service }} {{ item.date }} {{ item.time }}<button @click="completeAppt(item._id)"  class="border-[2px] p-2 rounded-2xl bg-white">Completed?</button></li>
+            <li v-for="item in confirmedAppointment">{{ item.fullName }} {{ item.service }} {{ item.date }} {{ item.time }}<button @click="completeAppt(item._id, item.customer)"  class="border-[2px] p-2 rounded-2xl bg-white">Completed?</button></li>
         </ul>
 
       </div>

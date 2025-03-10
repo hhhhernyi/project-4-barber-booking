@@ -39,10 +39,10 @@ async function handleSubmitSignIn() {
             <h1>MEMBERS LOG IN</h1>
             <form @submit.prevent="handleSubmitSignIn" class="flex flex-col w-full p-2">
             <label for="email">Email: </label>
-            <input v-model="formData.email" id="email" name="email" type="email" placeholder="Email" class="bg-white border-[2px] px-2"></input><br/>
+            <input v-model="formData.email" id="email" name="email" type="email" placeholder="Email" class="bg-white border-[2px] px-2 rounded-2xl"></input><br/>
 
             <label for="password">Password: </label>
-            <input v-model="formData.password" id="password" name="password" type="password" placeholder="Password" class="bg-white border-[2px] px-2"></input><br/>
+            <input v-model="formData.password" id="password" name="password" type="password" placeholder="Password" class="bg-white border-[2px] px-2 rounded-2xl"></input><br/>
 
 
             <button type="submit" class="border-[2px] p-2 rounded-2xl cursor-pointer bg-brown active:bg-amber-400">Log In</button>

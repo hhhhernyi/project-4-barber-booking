@@ -1,6 +1,6 @@
 <script setup>
 // IMPORTS
-import { reactive } from 'vue';
+import { reactive, watch } from 'vue';
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
 import * as appointmentService from '../../services/appointmentService';
@@ -24,6 +24,12 @@ const availableHours = [
     '1530-1600',
     '1600-1630',
 ]
+const state = reactive({
+    bookedTiming: [],
+    
+})
+
+const bookedTimeSlot=[]
 
 // VARIABLE
 
@@ -31,11 +37,25 @@ const availableHours = [
 const formData = reactive({
     fullName:"",
     mobileNumber:'',
+    email:'',
     service: '',
     date: Date,
     time:'',
     comments:'',
     status: "pending"
+})
+// watch method is used to run a callback when a reactive state changes, similar to useEffect dependencies
+watch(formData,()=>{
+    console.log(formData.date)
+    checkAppointments(formData.date);
+})
+
+watch(state,()=>{
+ for (let i=0; i<state.bookedTiming.length; i++) {
+    bookedTimeSlot.push(state.bookedTiming[i].time)
+ }
+ console.log('appointment timings: ',bookedTimeSlot)
+
 })
 // FUNCTION
 function formatDateISO(date){
@@ -50,6 +70,7 @@ async function handleSubmitAppointment() {
     if (
         !formData.fullName ||
         !formData.mobileNumber ||
+        !formData.email ||
         !formData.service ||
         !formData.date ||
         !formData.time 
@@ -63,12 +84,14 @@ async function handleSubmitAppointment() {
                 console.log(pendingAppt)
                 toast.success('Appointment is booked! please wait for confirmation');
                 router.push('/')
+                console.log('email confirmation email to: ', formData.email)
             } else {
                 console.log('form data: ', formData)
                 const pendingAppt = await appointmentService.createAppointmentGuest(formData);
                 console.log(pendingAppt)
                 toast.success('Appointment is booked! please wait for confirmation');
                 router.push('/')
+                console.log('email confirmation email to: ', formData.email)
             }
             
         } catch (error) {
@@ -77,18 +100,36 @@ async function handleSubmitAppointment() {
     }
 }
 
+async function checkAppointments(date) {
+    try {
+        // send a request to backend to check 
+        const response = await appointmentService.viewAppointmentsForADay(date)
+        console.log('response: ',response)
+         state.bookedTiming = response
+        console.log('booked Timing: ', state.bookedTiming.length)
+
+    } catch (error) {
+        console.log(error)
+
+    
+    }
+}
 
 
 </script>
 
 <template>
     <div class="flex h-[800px] flex-col justify-center items-center p-2">
-        <form @submit.prevent="handleSubmitAppointment" class="flex flex-col">
+        <div class="w-[80%] max-w-[300px] bg-white p-5 shadow-2xl rounded-2xl">
+            <form @submit.prevent="handleSubmitAppointment" class="flex flex-col">
             <label for="fullName">name: </label>
             <input v-model="formData.fullName" id="fullName" name="fullName" type="text" class="bg-white border-black border-[2px]"></input>
 
             <label for="mobileNumber">mobile number: </label>
             <input v-model="formData.mobileNumber" id="mobileNumber" name="mobileNumber" type="tel" class="bg-white border-black border-[2px]"></input>
+
+            <label for="email">Email: </label>
+            <input v-model="formData.email" id="email" name="email" type="email" class="bg-white border-black border-[2px]"></input>
 
             <label for="service" >service: </label>
             <select v-model="formData.service" id="service" name="service" class="bg-white border-black border-[2px]">
@@ -112,5 +153,7 @@ async function handleSubmitAppointment() {
 
             <button type="submit" class="bg-white border-black border-[2px] mt-2 rounded-2xl hover:bg-brown active:bg-amber-800">Book Appointment</button>
         </form>
+        </div>
+        
     </div>
 </template>

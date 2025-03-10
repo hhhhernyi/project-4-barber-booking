@@ -74,10 +74,24 @@ async function confirmPendingAppointment(appointmentId) {
         console.log(err);
     }
 }
+// View all appointments on a certain day
+async function viewAppointmentsForADay(date) {
+    try {
+        const res = await fetch(BASE_URL+`/checkPending/${date}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+         }
+          });
+          return  res.json();
+    } catch (err) {
+        console.log(err);
+    }
+}
 export {
     createAppointmentGuest,
     createAppointmentMember,
     viewPendingAppointments,
     viewConfirmedAppointments,
-    confirmPendingAppointment
+    confirmPendingAppointment,
+    viewAppointmentsForADay
   };
