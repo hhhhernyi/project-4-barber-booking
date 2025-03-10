@@ -28,6 +28,10 @@ const appointmentSchema = new mongoose.Schema(
       required: true,
       enum: ["pending", "confirmed", "completed"],
     },
+    comments: {
+      type: String
+
+    },
     customer: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
