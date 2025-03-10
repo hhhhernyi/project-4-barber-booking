@@ -33,19 +33,17 @@ async function handleSubmitSignUp() {
 </script>
 
 <template>
-    <div class="w-full h-[800px] flex justify-center items-center">
-        <div class="w-[90%] max-w-[400px] h-[500px] flex flex-col justify-center items-center border-[2px] shadow-2xl rounded-3xl">
-<h1>ADMIN LOGIN</h1>
-            <form @submit.prevent="handleSubmitSignUp">
+    <div class="w-full h-[600px] flex justify-center items-center">
+        <div class="w-[90%] max-w-[400px] h-[500px] flex flex-col justify-center items-center bg-white shadow-2xl rounded-2xl">
+            <h1>ADMIN LOGIN</h1>
+            <form @submit.prevent="handleSubmitSignUp" class="flex flex-col justify-center w-full p-2">
             <label for="email">Email: </label>
-            <input id="email" name="email" v-model="formData.email" type="email" class="bg-white border-[2px]"></input><br/>
+            <input id="email" name="email" v-model="formData.email" placeholder="Email" type="email" class="bg-white border-[2px] px-2 rounded-xl"></input><br/>
 
             <label for="password">Password: </label>
-            <input is="password" name="password" v-model="formData.password" type="password" class="bg-white border-[2px]"></input><br/>
+            <input is="password" name="password" v-model="formData.password" placeholder="Password" type="password" class="bg-white border-[2px] px-2 rounded-xl"></input><br/>
 
             <button type="submit" class="border-[2px] p-2 rounded-2xl cursor-pointer active:bg-amber-400">Log In</button>
-
-
         </form>
         </div>
         

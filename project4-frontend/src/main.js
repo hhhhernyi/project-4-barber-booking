@@ -11,7 +11,7 @@ import Carousel3d from 'vue-carousel-3d'
 
 const app = createApp(App)
 app.use(ConfirmationService);
-app.use(PrimeVue);
+app.use(PrimeVue, { unstyled: true });
 app.use(router);
 app.use(toast);
 app.use(Carousel3d);

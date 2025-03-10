@@ -5,6 +5,8 @@ import { reactive } from 'vue';
 import * as authService from '../../services/authService'
 import { useToast } from 'vue-toastification';
 
+
+
 // CONSTANTS
 const toast = useToast();
 const router = useRouter();
@@ -32,8 +34,8 @@ async function handleSubmitSignIn() {
 </script>
 
 <template>
-    <div class="w-full h-[800px] flex justify-center items-center">
-        <div class="w-[400px] h-[500px] bg-white border-[2px] rounded-2xl flex flex-col justify-center items-center shadow-2xl ">
+    <div class="w-full h-[600px] flex justify-center items-center">
+        <div class="w-[400px] h-[500px] bg-white  rounded-2xl flex flex-col justify-center items-center shadow-2xl ">
             <h1>MEMBERS LOG IN</h1>
             <form @submit.prevent="handleSubmitSignIn" class="flex flex-col w-full p-2">
             <label for="email">Email: </label>
@@ -42,17 +44,11 @@ async function handleSubmitSignIn() {
             <label for="password">Password: </label>
             <input v-model="formData.password" id="password" name="password" type="password" placeholder="Password" class="bg-white border-[2px] px-2"></input><br/>
 
+
             <button type="submit" class="border-[2px] p-2 rounded-2xl cursor-pointer bg-brown active:bg-amber-400">Log In</button>
-          </form>  
+            </form>  
             <p>No account yet?</p>
-            <button class="w-[97%] border-[2px] p-2 rounded-2xl cursor-pointer bg-brown active:bg-amber-400"><RouterLink to="/auth/signup">Sign up now!</RouterLink></button>
-            <button class="w-[97%] border-[2px] p-2 rounded-2xl cursor-pointer mt-10 bg-brown active:bg-amber-400"><RouterLink to="/auth/admin-login">Go To Admin Login</RouterLink></button>
-
-
-        
-        </div>
-            
-
-        
+            <button class="w-[97%] border-[2px] p-2 rounded-2xl cursor-pointer bg-brown active:bg-amber-400"><RouterLink to="/auth/signup">Sign up now!</RouterLink></button>        
+        </div>        
     </div>
 </template>

@@ -100,6 +100,8 @@ async function handleSubmitAppointment() {
             <label for="date">date: </label>
             <input v-model="formData.date" id="date" name="date" type="date" :min="today" class="bg-white border-black border-[2px]"></input>
 
+            
+
             <label for="time">time: </label>
             <select v-model="formData.time" id="time" name="time" class="bg-white border-black border-[2px]">
                 <option v-for="time in availableHours" :name="time">{{ time }}</option>
