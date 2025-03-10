@@ -61,4 +61,14 @@ router.post("/guest", async (req, res) => {
     }
   });
 
+  router.get("/checkPending/:date", async (req, res) => {
+    try {
+      const apptDate = req.params.date
+      const allPendingAppointments = await Appointment.find({date: apptDate}); 
+      res.status(201).json(allPendingAppointments);
+    } catch (err) {
+      res.status(500).json({ err: err.message });
+    }
+  });
+
   module.exports = router;
