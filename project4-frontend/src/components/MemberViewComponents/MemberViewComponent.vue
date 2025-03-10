@@ -7,14 +7,16 @@ import { onMounted, reactive, ref } from 'vue';
 import * as userService from '../../services/user'
 // IMPORTS
 // CONSTANTS
-const userDetail = reactive({key: 'value'})
+const state = reactive({
+    userDetail: {}
+})
 // VARIABLES
 // STATE
 onMounted(async ()=>{
     try { 
         const response = await userService.viewSingleUser(userId)
-        userDetail.value = response;
-        console.log(userDetail)
+      state.userDetail = response
+      console.log(state.userDetail)
 
     } catch (error) {
         console.log(error)
@@ -26,13 +28,12 @@ onMounted(async ()=>{
 </script>
 
 <template>
-    <div v-if="token" class="w-full h-[800px] flex items-center justify-center">
-        <p>members who are logged in can see this</p>
-        <h1>Member Info</h1><br/>
-        <p>Email: {{ userDetail.value.email }}</p><br/>
-        <p>Contact: {{ userDetail.value.mobileNumber }}</p><br/>
-        <p>Points: {{ userDetail.value.points }}</p><br/>
-        <p>Member Since: {{ userDetail.value.createdAt }}</p><br/>
+    <div v-if="token" class="w-full h-[800px] flex flex-col items-center justify-center">
+        <h1>Member Info</h1>
+        <p>Email: {{ state.userDetail.email }}</p>
+        <p>Contact: {{ state.userDetail.mobileNumber }}</p>
+        <p>Points: {{ state.userDetail.points }}</p>
+       <p>Member Since: {{ state.userDetail.createdAt }}</p>
         
     </div>
 

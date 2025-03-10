@@ -5,6 +5,9 @@ import ConfirmPopup from 'primevue/confirmpopup';
 import * as appointmentService from "../../services/appointmentService";
 import { useConfirm } from "primevue/useconfirm";
 import { useToast } from "vue-toastification";
+import dayjs from "dayjs";
+//import dayjs from 'dayjs' // ES 2015
+dayjs().format()
 // CONSTANTS
 const pendingAppointment = ref([]);
 const confirmedAppointment = ref([])

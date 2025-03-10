@@ -9,10 +9,7 @@ import { useToast } from "vue-toastification";
 // CONSTANTS
 const router = useRouter();
 const toast = useToast();
-const token = reactive(localStorage.getItem('token')) 
-
-    
-
+const token =localStorage.getItem('token')
 
 // VARIABLES
 const showSmallNavBar = ref(false);

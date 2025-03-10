@@ -45,25 +45,28 @@ function validatePassword(pw, cfmPw) {
 
 <template>
     <div class="w-full h-[1000px] flex justify-center items-center">
-            <form @submit.prevent="handleSubmitSignUp">
+        <div class="bg-white w-[80%] max-w-[400px] h-[500px] flex flex-col justify-center items-center rounded-2xl shadow-2xl">
+            <form @submit.prevent="handleSubmitSignUp" class="flex flex-col w-[90%]">
             <label for="fullName">Full Name: </label>
-            <input v-model="formData.fullName" id="fullName" name="fullName" type="text" class="bg-white border-[2px]"></input><br/>
+            <input v-model="formData.fullName" id="fullName" name="fullName" type="text" placeholder="Full Name" class="bg-white border-[2px] px-2 border-gray-400 focus:bg-amber-300"></input><br/>
 
             <label for="mobileNumber">Mobile Number: </label>
-            <input v-model="formData.mobileNumber" id="mobileNumber" name="mobileNumber" type="tel" class="bg-white border-[2px]"></input><br/>
+            <input v-model="formData.mobileNumber" id="mobileNumber" name="mobileNumber" type="tel"  placeholder="Mobile Number" class="bg-white border-[2px] px-2 border-gray-400"></input><br/>
 
             <label for="email">Email: </label>
-            <input v-model="formData.email" id="email" name="email" type="email" class="bg-white border-[2px]"></input><br/>
+            <input v-model="formData.email" id="email" name="email" type="email" placeholder="Email" class="bg-white border-[2px] px-2 border-gray-400"></input><br/>
 
             <label for="password">Password: </label>
-            <input v-model="formData.password" id="password" name="password" type="password" class="bg-white border-[2px]"></input><br/>
+            <input v-model="formData.password" id="password" name="password" type="password" placeholder="Password" class="bg-white border-[2px] px-2 border-gray-400"></input><br/>
 
             <label for="confirmPassword">Confirm Password: </label>
-            <input v-model="formData.confirmPassword" id="confirmPassword" name="confirmPassword" type="password" class="bg-white border-[2px]"></input><br/>
+            <input v-model="formData.confirmPassword" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" type="password" class="bg-white border-[2px] px-2 border-gray-400"></input><br/>
 
-            <button type="submit" class="border-[2px] p-2 rounded-2xl cursor-pointer active:bg-amber-400">Create Account!</button>
+            <button type="submit" class="border-[2px] p-2 rounded-2xl cursor-pointer bg-successGreen active:bg-amber-400">Create Account!</button>
 
         </form>
+        </div>
+            
 
         
     </div>

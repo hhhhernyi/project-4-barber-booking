@@ -16,7 +16,7 @@ import { RouterLink } from 'vue-router';
         </div>
     </div>
     <div class="flex flex-col md:flex-row items-center justify-around p-2">
-        <div class="flex flex-col sm:w-[80%] m-2">
+        <div class="flex flex-col sm:w-[80%] m-2 border-[1px]">
             <div>
                 <img src="../../assets/images/homeServiceCutImage.jpg" alt="cutting hair" class="rounded-3xl"/>
             </div>
@@ -26,7 +26,7 @@ import { RouterLink } from 'vue-router';
             </div>
         </div>
 
-        <div class="flex flex-col sm:w-[80%] m-2">
+        <div class="flex flex-col sm:w-[80%] m-2 border-[1px]">
             <div>
                 <img src="../../assets/images/homeServiceColorImage.jpg" alt="Coloring hair" class="rounded-3xl"/>
             </div>
@@ -36,7 +36,7 @@ import { RouterLink } from 'vue-router';
             </div>
         </div>
 
-        <div class="flex flex-col sm:w-[80%] m-2">
+        <div class="flex flex-col sm:w-[80%] m-2 border-[1px]">
             <div>
                 <img src="../../assets/images/homeServicePermImage.jpeg" alt="perm hair" class="rounded-3xl"/>
             </div>
@@ -46,7 +46,7 @@ import { RouterLink } from 'vue-router';
             </div>
         </div>
 
-        <div class="flex flex-col sm:w-[80%] m-2">
+        <div class="flex flex-col sm:w-[80%] m-2 border-[1px]">
             <div>
                 <img src="../../assets/images/homeServiceTreatmentImage.png" alt="perm hair" class="rounded-3xl"/>
             </div>

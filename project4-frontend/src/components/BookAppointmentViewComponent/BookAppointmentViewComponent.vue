@@ -5,6 +5,8 @@ import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
 import * as appointmentService from '../../services/appointmentService';
 // CONSTANTS
+const date = new Date();
+const today = formatDateISO(date)
 const toast = useToast();
 const router = useRouter();
 const token = localStorage.getItem('token');
@@ -32,9 +34,18 @@ const formData = reactive({
     service: '',
     date: Date,
     time:'',
+    comments:'',
     status: "pending"
 })
 // FUNCTION
+function formatDateISO(date){
+    // Convert the date to ISO string
+    const isoString = date.toISOString();
+    // Split at the "T" character to get the date part
+    const formattedDate = isoString.split("T")[0];
+    return formattedDate;
+};
+
 async function handleSubmitAppointment() {
     if (
         !formData.fullName ||
@@ -71,8 +82,8 @@ async function handleSubmitAppointment() {
 </script>
 
 <template>
-    <div class="flex h-[800px] flex-col justify-center items-center">
-        <form @submit.prevent="handleSubmitAppointment">
+    <div class="flex h-[800px] flex-col justify-center items-center p-2">
+        <form @submit.prevent="handleSubmitAppointment" class="flex flex-col">
             <label for="fullName">name: </label>
             <input v-model="formData.fullName" id="fullName" name="fullName" type="text" class="bg-white border-black border-[2px]"></input>
 
@@ -87,14 +98,17 @@ async function handleSubmitAppointment() {
             </select>
 
             <label for="date">date: </label>
-            <input v-model="formData.date" id="date" name="date" type="date" class="bg-white border-black border-[2px]"></input>
+            <input v-model="formData.date" id="date" name="date" type="date" :min="today" class="bg-white border-black border-[2px]"></input>
 
             <label for="time">time: </label>
             <select v-model="formData.time" id="time" name="time" class="bg-white border-black border-[2px]">
                 <option v-for="time in availableHours" :name="time">{{ time }}</option>
             </select>
 
-            <button type="submit">Book Appointment</button>
+            <label for="comments">Additional Comments?</label>
+            <textarea id="comments" name="comments" v-model="formData.comments" class="bg-white border-black border-[2px]"></textarea>
+
+            <button type="submit" class="bg-white border-black border-[2px] mt-2 rounded-2xl hover:bg-brown active:bg-amber-800">Book Appointment</button>
         </form>
     </div>
 </template>

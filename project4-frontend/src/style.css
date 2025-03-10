@@ -16,7 +16,7 @@
   --color-mediumBrown: #C8B6A6;
   --color-darkBrown: #69441D;
   --color-black: #1e1917;
-  --color-white: #f1e1d9;
+  --color-white: #ffffff;
   --color-red: #ec1818;
   --color-yellow: #f4ec49;
   --color-blue: #078af1;
@@ -29,6 +29,7 @@
   --color-grey: #626965;
   --color-lightGrey: #978580;
   --color-darkGrey: #3f4441;
+  --color-successGreen: #4BB543;
   --font-body: Josefin Sans, sans-serif; 
   --font-special: Nunito, sans-serif; 
   --font-poppins: Poppins, sans-serif;

@@ -33,23 +33,23 @@ async function handleSubmitSignIn() {
 
 <template>
     <div class="w-full h-[800px] flex justify-center items-center">
-        <div class="w-[400px] h-[500px] border-[2px] rounded-2xl flex flex-col justify-center items-center shadow-2xl ">
+        <div class="w-[400px] h-[500px] bg-white border-[2px] rounded-2xl flex flex-col justify-center items-center shadow-2xl ">
             <h1>MEMBERS LOG IN</h1>
-            <form @submit.prevent="handleSubmitSignIn">
+            <form @submit.prevent="handleSubmitSignIn" class="flex flex-col w-full p-2">
             <label for="email">Email: </label>
-            <input v-model="formData.email" id="email" name="email" type="email" class="bg-white border-[2px]"></input><br/>
+            <input v-model="formData.email" id="email" name="email" type="email" placeholder="Email" class="bg-white border-[2px] px-2"></input><br/>
 
             <label for="password">Password: </label>
-            <input v-model="formData.password" id="password" name="password" type="password" class="bg-white border-[2px]"></input><br/>
+            <input v-model="formData.password" id="password" name="password" type="password" placeholder="Password" class="bg-white border-[2px] px-2"></input><br/>
 
-            <button type="submit" class="border-[2px] p-2 rounded-2xl cursor-pointer active:bg-amber-400">Log In</button>
-            <RouterLink to="/auth/admin-login"><button class="border-[2px] p-2 rounded-2xl cursor-pointer active:bg-amber-400">Log In as Admin</button></RouterLink>
-
+            <button type="submit" class="border-[2px] p-2 rounded-2xl cursor-pointer bg-brown active:bg-amber-400">Log In</button>
+          </form>  
             <p>No account yet?</p>
-            <RouterLink to="/auth/signup"> <button  class="border-[2px] p-2 rounded-2xl cursor-pointer active:bg-amber-400">Sign up now!</button></RouterLink>
+            <button class="w-[97%] border-[2px] p-2 rounded-2xl cursor-pointer bg-brown active:bg-amber-400"><RouterLink to="/auth/signup">Sign up now!</RouterLink></button>
+            <button class="w-[97%] border-[2px] p-2 rounded-2xl cursor-pointer mt-10 bg-brown active:bg-amber-400"><RouterLink to="/auth/admin-login">Go To Admin Login</RouterLink></button>
 
 
-        </form>
+        
         </div>
             
 

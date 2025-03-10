@@ -34,22 +34,23 @@ async function handleSubmitSignin() {
 
 <template>
     <div class="w-full h-[700px] flex justify-center items-center">
-        <div class="border-[2px] w-[80%] max-w-[400px] h-[400px] flex justify-center items-center rounded-2xl shadow-2xl">
-<form @submit.prevent="handleSubmitSignUp">
+        <div class="border-[2px] w-[80%] max-w-[400px] h-[400px] flex justify-center items-center rounded-2xl shadow-2xl bg-white">
+        <form @submit.prevent="handleSubmitSignUp" class="flex flex-col w-[90%]">
             <label for="email">Email: </label>
-            <input id="email" name="email" v-model="formData.email" type="email" class="bg-white border-[2px]"></input><br/>
+            <input id="email" name="email" v-model="formData.email" type="email" placeholder="Email" class="bg-white border-[2px] px-2"></input><br/>
 
             <label for="password">Password: </label>
-            <input id="password" name="password" v-model="formData.password" type="password" class="bg-white border-[2px]"></input><br/>
+            <input id="password" name="password" v-model="formData.password" type="password" placeholder="password" class="bg-white border-[2px] px-2"></input><br/>
 
-            <button type="submit" @click="handleSubmitSignin"class="border-[2px] p-2 rounded-2xl cursor-pointer active:bg-amber-400">Log In</button>
-            <p>No account yet?</p>
-            <RouterLink to="/auth/signup"> <button  class="border-[2px] p-2 rounded-2xl cursor-pointer active:bg-amber-400">Sign up now!</button></RouterLink>
+            <button type="submit" @click="handleSubmitSignin"class="border-[2px] p-2 my-2 rounded-2xl cursor-pointer bg-brown active:bg-amber-400">Log In</button>
+            <button class="border-[2px] p-2 my-2 rounded-2xl bg-brown cursor-pointer active:bg-amber-400"><RouterLink to="/book-appointment">Continue as Guest</RouterLink></button>
+            <p class="underline underline-offset-4">No account yet?</p>
+            <button  class="border-[2px] p-2 my-2 rounded-2xl bg-brown cursor-pointer active:bg-amber-400"><RouterLink to="/auth/signup"> Sign up now!</RouterLink></button>
         </form>
         </div>
             
     </div>
     <div class="flex justify-center mb-10">
-        <RouterLink to="/book-appointment"><button class="border-[2px] p-2 rounded-2xl border-amber-950 cursor-pointer">Continue as Guest</button></RouterLink>
+        
     </div>
 </template>

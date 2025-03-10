@@ -1,7 +1,8 @@
 <script setup>
+import ServicesViewComponent from '../components/ServicesViewComponents/ServicesViewComponent.vue';
 
 </script>
 
 <template>
-    <p>welcome to see all our services</p>
+    <ServicesViewComponent/>
 </template>
