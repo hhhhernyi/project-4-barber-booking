@@ -41,10 +41,10 @@ async function confirmAppt(itemID, fullName, email, service, date, time) {
     try {
       const updatedAppoinmentStatus = await appointmentService.confirmPendingAppointment(itemID)
       console.log("updated: ", updatedAppoinmentStatus)
-      const confirmApptsResponse = await appointmentService.viewConfirmedAppointments();
-      const pendingApptsResponse = await appointmentService.viewPendingAppointments();
-      pendingAppointment.value = pendingApptsResponse;
-      confirmedAppointment.value = confirmApptsResponse;
+      confirmedAppointment.value = await appointmentService.viewConfirmedAppointments();
+      pendingAppointment.value = await appointmentService.viewPendingAppointments();
+      //pendingAppointment.value = pendingApptsResponse;
+      //confirmedAppointment.value = confirmApptsResponse;
       const emailResponse = await sendConfirmationEmail(fullName, email, service, date, time);
       console.log('email response: ', emailResponse)
       toast.success('Appointment confirmed')
@@ -54,10 +54,15 @@ async function confirmAppt(itemID, fullName, email, service, date, time) {
     }
 }
 
-function completeAppt(itemID, customer) {
+async function completeAppt(itemID, customer) {
   console.log("appointment completed: ",itemID)
   console.log('points added to: ', customer)
+  const completedAppointment = await appointmentService.completeAppointment(itemID)
+  console.log('completedAppointment: ', completedAppointment)
+  confirmedAppointment.value = await appointmentService.viewConfirmedAppointments();
+      pendingAppointment.value = await appointmentService.viewPendingAppointments();
   toast.success('Appointment completed!')
+  // i need to have a service to update the status of the appointment with itemID form confirmd to completed
 }
 
 async function sendConfirmationEmail(fullName, email, service, date, time) {

@@ -74,6 +74,22 @@ async function confirmPendingAppointment(appointmentId) {
         console.log(err);
     }
 }
+
+// complete an appointment
+async function completeAppointment(appointmentId) {
+    try {
+        const res = await fetch(BASE_URL+`/confirmed/${appointmentId}`, {
+            method: 'PUT',
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({ status: "completed" }),
+          });
+          return  res.json();
+    } catch (err) {
+        console.log(err);
+    }
+}
 // View all appointments on a certain day
 async function viewAppointmentsForADay(date) {
     try {
@@ -93,5 +109,6 @@ export {
     viewPendingAppointments,
     viewConfirmedAppointments,
     confirmPendingAppointment,
-    viewAppointmentsForADay
+    viewAppointmentsForADay,
+    completeAppointment
   };
