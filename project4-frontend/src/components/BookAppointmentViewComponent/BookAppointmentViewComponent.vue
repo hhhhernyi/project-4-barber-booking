@@ -94,7 +94,8 @@ async function sendConfirmationEmail(formData) {
         email: formData.email,
         service: formData.service,
         date: formData.date,
-        time: formData.time
+        time: formData.time,
+        message: 'Thank you for booking a service with us. This is a receipt of your booking. Please wait for confirmation from our barbers!'
     };
     console.log('templateParams: ', templateParams)
 
