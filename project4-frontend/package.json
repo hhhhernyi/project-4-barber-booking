@@ -10,12 +10,14 @@
     "test": "mocha --exit"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@primeuix/themes": "^1.0.0",
     "@splidejs/vue-splide": "^0.6.12",
     "@tailwindcss/vite": "^4.0.9",
     "bootstrap-vue": "^2.23.1",
     "chai": "^5.2.0",
     "dayjs": "^1.11.13",
+    "emailjs-com": "^3.2.0",
     "embla-carousel-autoplay": "^8.5.2",
     "embla-carousel-vue": "^8.5.2",
     "mocha": "^11.1.0",

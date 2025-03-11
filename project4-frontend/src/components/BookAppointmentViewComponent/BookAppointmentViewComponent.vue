@@ -1,16 +1,22 @@
 <script setup>
 // IMPORTS
-import { reactive, watch } from 'vue';
+import { reactive, watch, computed } from 'vue';
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
 import * as appointmentService from '../../services/appointmentService';
+import emailjs from "@emailjs/browser";
+
 // CONSTANTS
+const SERVICE_ID = import.meta.env.VITE_EMAIL_TEMPLATE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_SERVICE_ID;
+const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
+
 const date = new Date();
 const today = formatDateISO(date)
 const toast = useToast();
 const router = useRouter();
 const token = localStorage.getItem('token');
-const availableHours = [
+const openingHours = [
     '1030-1100',
     '1100-1130',
     '1130-1200',
@@ -28,11 +34,16 @@ const state = reactive({
     bookedTiming: [],
     
 })
+// Use computed to track available slots
+const availableSlots = computed(() => {
+  // Extract times from bookedTiming and filter them out from openingHours
+  const bookedTimes = state.bookedTiming.map(booking => booking.time);
+  return openingHours.filter(slot => !bookedTimes.includes(slot));
+});
 
-const bookedTimeSlot=[]
+let bookedTimeSlot=[]
 
 // VARIABLE
-
 // STATES
 const formData = reactive({
     fullName:"",
@@ -44,16 +55,26 @@ const formData = reactive({
     comments:'',
     status: "pending"
 })
+
+
 // watch method is used to run a callback when a reactive state changes, similar to useEffect dependencies
-watch(formData,()=>{
-    console.log(formData.date)
-    checkAppointments(formData.date);
-})
+watch(() => formData.date, (newDate, oldDate) => {
+    // Only run checkAppointments when the date changes
+    if (newDate !== oldDate) {
+        state.bookedTiming = []; // Reset the booked timings
+        bookedTimeSlot=[]
+        console.log('Date changed: ', newDate);
+        checkAppointments(newDate); // Trigger the appointment check for the new date
+    }
+});
 
 watch(state,()=>{
- for (let i=0; i<state.bookedTiming.length; i++) {
+    if (state.bookedTiming.length !== bookedTimeSlot.length) {
+        for (let i=0; i<state.bookedTiming.length; i++) {
     bookedTimeSlot.push(state.bookedTiming[i].time)
  }
+    }
+ 
  console.log('appointment timings: ',bookedTimeSlot)
 
 })
@@ -65,6 +86,34 @@ function formatDateISO(date){
     const formattedDate = isoString.split("T")[0];
     return formattedDate;
 };
+
+// Function to send email using EmailJS
+async function sendConfirmationEmail(formData) {
+    const templateParams = {
+        fullName: formData.fullName,
+        email: formData.email,
+        service: formData.service,
+        date: formData.date,
+        time: formData.time
+    };
+    console.log('templateParams: ', templateParams)
+
+    try {
+        const result = await emailjs.send(
+            "service_77il0n9",
+            "template_k96zlsx",
+            templateParams,
+            PUBLIC_KEY
+        );
+        console.log('Email sent successfully', result);
+        toast.success('Confirmation email sent!');
+    } catch (error) {
+        console.log('Error sending email:', error);
+        toast.error('There was an error sending the confirmation email.');
+    }
+}
+
+
 
 async function handleSubmitAppointment() {
     if (
@@ -85,6 +134,7 @@ async function handleSubmitAppointment() {
                 toast.success('Appointment is booked! please wait for confirmation');
                 router.push('/')
                 console.log('email confirmation email to: ', formData.email)
+                await sendConfirmationEmail(formData);
             } else {
                 console.log('form data: ', formData)
                 const pendingAppt = await appointmentService.createAppointmentGuest(formData);
@@ -92,10 +142,12 @@ async function handleSubmitAppointment() {
                 toast.success('Appointment is booked! please wait for confirmation');
                 router.push('/')
                 console.log('email confirmation email to: ', formData.email)
+                await sendConfirmationEmail(formData);
             }
             
         } catch (error) {
             console.log('error message: ',error)
+            toast.error('there was an error processing your request')
         }
     }
 }
@@ -145,7 +197,7 @@ async function checkAppointments(date) {
 
             <label for="time">time: </label>
             <select v-model="formData.time" id="time" name="time" class="bg-white border-black border-[2px]">
-                <option v-for="time in availableHours" :name="time">{{ time }}</option>
+                <option v-for="time in availableSlots" :name="time">{{ time }}</option>
             </select>
 
             <label for="comments">Additional Comments?</label>
