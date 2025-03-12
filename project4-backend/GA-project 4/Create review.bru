@@ -1,0 +1,20 @@
+meta {
+  name: Create review
+  type: http
+  seq: 11
+}
+
+post {
+  url: http://localhost:3000/reviews
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+  "fullName": "LHR",
+  "review": "i had a bad experience with this studio today",
+    "stars": 1
+  }
+  
+}
