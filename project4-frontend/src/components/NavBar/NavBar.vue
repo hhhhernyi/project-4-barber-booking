@@ -76,15 +76,19 @@ function handleLogout() {
   </div>
 
     <div v-show="showSmallNavBar" class="w-[85%] mx-auto border-[2px] flex flex-col items-center bg-mediumBrown opacity-95 rounded-2xl fixed right-0 left-0 top-[120px]">
-      <RouterLink to="/"><p class="py-5">Home</p></RouterLink>
-      <RouterLink to="/services"><p class="py-5">Services</p></RouterLink>
-      <RouterLink to="/auth/login-booking"><p class="py-5">Book Appointment</p></RouterLink>
-      <RouterLink to="/auth/login"><p class="py-5">Login</p ></RouterLink>
-        <div v-if="token">
+      <div v-if="token">
         <div v-if="adminStatus===true"><RouterLink to="/admin/home"><p class="py-5">Admin</p ></RouterLink></div>
         <div v-else-if="adminStatus===false"><RouterLink to="/member/home"><p class="py-5">Member</p ></RouterLink></div>
         
       </div>
+      <RouterLink to="/"><p class="py-5">Home</p></RouterLink>
+      <RouterLink to="/services"><p class="py-5">Services</p></RouterLink>
+      <RouterLink to="/auth/login-booking"><p class="py-5">Book Appointment</p></RouterLink>
+      <div>
+        <RouterLink v-if="!token" to="/auth/login"><p class="border-[2px] p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Login</p ></RouterLink>
+        <RouterLink v-else="token" to="/"><p @click="handleLogout" class="border-[2px] p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Logout</p ></RouterLink>
+      </div>
+        
       
     </div>
 

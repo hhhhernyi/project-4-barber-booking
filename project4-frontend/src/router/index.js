@@ -9,6 +9,7 @@ import BookAppointmentView from "../Views/BookAppointmentView.vue";
 import test from "../components/test/test.vue";
 import AdminHomeView from "../Views/AdminHomeView.vue";
 import MemberHomeView from "../Views/MemberHomeView.vue";
+import ReviewView from "../Views/ReviewView.vue";
 
 const router = createRouter(
     {
@@ -64,6 +65,13 @@ const router = createRouter(
                 path:'/member/:userId',
                 name: 'memberDashboard',
                 component: MemberHomeView,
+                meta: { requiresAuth: true },
+            },
+            {
+                path:'/reviews/new',
+                name: 'reviewsFrorm',
+                component: ReviewView,
+                meta: { requiresAuth: true },
             },
         ],
     },
