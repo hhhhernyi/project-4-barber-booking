@@ -34,9 +34,9 @@ onMounted(async ()=>{
 
 <template>
   <div class="w-full h-[400px] flex flex-col justify-center my-2 ">
-  <Carousel v-bind="config">
+  <Carousel v-bind="config" >
     <Slide v-for="item in state.allReviews" :key="slide">
-      <div class="carousel__item w-[200px] h-[200px] border-[2px] flex justify-center items-center">{{item.fullName}} <br/>{{ item.review }} <br/> {{ item.stars }}/5 experience</div>
+      <div class="carousel__item w-[200px] h-[200px] flex justify-center items-center p-2 bg-white rounded-2xl overflow-hidden border-darkBrown">{{item.fullName}} <br/>{{ item.review }} <br/> {{ item.stars }}/5 experience</div>
     </Slide>
 
     <template #addons>

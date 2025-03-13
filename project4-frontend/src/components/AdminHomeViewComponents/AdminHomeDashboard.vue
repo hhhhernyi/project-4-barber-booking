@@ -3,11 +3,11 @@
 import { onMounted, ref } from "vue";
 import ConfirmPopup from 'primevue/confirmpopup';
 import * as appointmentService from "../../services/appointmentService";
+import * as userService from '../../services/user'
 import { useConfirm } from "primevue/useconfirm";
 import { useToast } from "vue-toastification";
 import dayjs from "dayjs";
 import emailjs from "@emailjs/browser";
-//import dayjs from 'dayjs' // ES 2015
 dayjs().format()
 // CONSTANTS
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
@@ -15,6 +15,7 @@ const pendingAppointment = ref([]);
 const confirmedAppointment = ref([])
 const toast = useToast();
 const confirm = useConfirm();
+const today = new Date()
 // VARIABLES
 // STATES
 onMounted(async ()=>{
@@ -43,8 +44,6 @@ async function confirmAppt(itemID, fullName, email, service, date, time) {
       console.log("updated: ", updatedAppoinmentStatus)
       confirmedAppointment.value = await appointmentService.viewConfirmedAppointments();
       pendingAppointment.value = await appointmentService.viewPendingAppointments();
-      //pendingAppointment.value = pendingApptsResponse;
-      //confirmedAppointment.value = confirmApptsResponse;
       const emailResponse = await sendConfirmationEmail(fullName, email, service, date, time);
       console.log('email response: ', emailResponse)
       toast.success('Appointment confirmed')
@@ -53,14 +52,47 @@ async function confirmAppt(itemID, fullName, email, service, date, time) {
       console.log(error)
     }
 }
+async function getCustomerDetails(customerID) {
+  try {
+    const customerData = await userService.viewSingleUser(customerID)
+    return customerData
+  } catch (error) {
+    console.log(error)
+  }
+}
 
-async function completeAppt(itemID, customer) {
+async function completeAppt(itemID,service, customer) {
+  let addedPoints=0
   console.log("appointment completed: ",itemID)
-  console.log('points added to: ', customer)
+  // check if the customer is logged in or not
+if (customer ) {
+  // get the customer points
+  let customerDetails = await getCustomerDetails(customer)
+  let customerPoints = customerDetails.points
+  console.log('customerpoints: ', customerPoints)
+  if (service === 'cut') {
+    addedPoints=7
+  } else if (service==='color') {
+    addedPoints=30
+  } else if (service === 'perm') {
+    addedPoints = 50
+  } else if (service === 'treatment') {
+    addedPoints = 100
+  }
+  //newPoints = customerPoints + points
+  // get a service to update the customer profile
+  console.log(`${addedPoints} points added to:` , customer)
+  let newPoints = customerPoints+ addedPoints
+  let updateData = {"points": newPoints}
+  let updatedCustomerDetails = await userService.updateUser(customer, updateData)
+  console.log(updatedCustomerDetails)
+  console.log(`customer now has ${newPoints} points`)
+}
+
   const completedAppointment = await appointmentService.completeAppointment(itemID)
   console.log('completedAppointment: ', completedAppointment)
   confirmedAppointment.value = await appointmentService.viewConfirmedAppointments();
-      pendingAppointment.value = await appointmentService.viewPendingAppointments();
+  pendingAppointment.value = await appointmentService.viewPendingAppointments();
   toast.success('Appointment completed!')
   // i need to have a service to update the status of the appointment with itemID form confirmd to completed
 }
@@ -96,26 +128,66 @@ async function sendConfirmationEmail(fullName, email, service, date, time) {
 
 </script>
 <template>
-  <div class="w-full h-[800px] flex flex-col justify-center items-center">
-    <div class="flex space-around">
+  <div class="w-full md:h-[800px] sm:h-[1200px] flex flex-col items-center">
+    <div class="mt-[120px]">Today's Date: 
+      <p class="font-special text-3xl">{{  dayjs(today).toString().slice(0,17)}}</p>
+      
+    </div>
+    <div class="flex mt-[50px] sm:flex-col md:flex-row space-around justify-center items-center">
       <!-- display all pending appointments here -->
-      <div class="border-[2px] m-2 w-[50%] h-[500px] overflow-auto">
-        <h2>Pending Appointments</h2>
-        <ul>
-            <li v-for="item in pendingAppointment" class="flex justify-items-end">{{ item.fullName }} {{ item.service }} {{ dayjs(item.date).toString().slice(0,17) }} {{ item.time }}<button @click="confirmAppt(item._id, item.fullName, item.email, item.service, item.date, item.time)"  class="border-[2px] p-2 rounded-2xl bg-white">confirm appointment?</button></li>
+      <div class="border-[2px] m-2 sm:w-[80%] sm:h-[400px] md:w-[70%] md:h-[500px] p-2 bg-brown rounded-xl">
+        <h2 class="mx-auto text-center text-2xl underline font-poppins">Pending Appointments</h2>
+        <section class="flex border-[2px] border-darkBrown bg-darkBrown text-white px-2">
+        <p class="w-[80px]">Name: </p>
+        <p class="w-[100px]">Service: </p>
+        <p class="w-[150px]">Date and time:</p>
+        </section>
+        <div class="md:h-[430px] sm:h-[330px] overflow-auto ">
+          <ul>
+            <li v-for="item in pendingAppointment" class="flex flex-col justify-items-end">
+              <div class="flex items-center my-2">
+                <p class="w-[80px] px-2">{{ item.fullName }}</p> <p class="w-[100px] px-2">{{ item.service }}</p><div class="flex flex-col w-[150px]"><p>{{ dayjs(item.date).toString().slice(0,17) }}</p> <p>{{ item.time }}</p> </div>
+              </div>
+              <div>
+                <button @click="confirmAppt(item._id, item.fullName, item.email, item.service, item.date, item.time)"  class=" w-full border-[2px] p-2 rounded-2xl bg-white hover:cursor-pointer">Confirm ?</button>
+              </div>
+              
+              
+              </li>
         </ul>
+        </div>
+        
+        
 
       </div>
 
       <!-- display all confirmed appointments here -->
-      <div class="border-[2px] m-2 w-[50%] h-[500px] overflow-auto">
-        <h2>Confirmed Appointments</h2>
-        
-        <ul>
-            <li v-for="item in confirmedAppointment">{{ item.fullName }} {{ item.service }} {{ dayjs(item.date).toString().slice(0,17) }} {{ item.time }}<button @click="completeAppt(item._id, item.customer)"  class="border-[2px] p-2 rounded-2xl bg-white">Completed?</button></li>
+      <div class="border-[2px] m-2 sm:w-[80%] sm:h-[400px] md:w-[70%] md:h-[500px] p-2 bg-brown rounded-xl">
+        <h2 class="mx-auto text-center text-2xl underline font-poppins">Confirmed Appointments</h2>
+        <section class="flex border-[2px] border-darkBrown bg-darkBrown text-white px-2">
+        <p class="w-[80px]">Name: </p>
+        <p class="w-[100px]">Service: </p>
+        <p class="w-[150px]">Date and time:</p>
+        </section>
+        <div class="md:h-[430px] sm:h-[330px] overflow-auto ">
+          <ul>
+            <li v-for="item in confirmedAppointment" class="flex flex-col justify-items-end">
+              <div class="flex items-center my-2">
+                <p class="w-[80px] px-2">{{ item.fullName }}</p> <p class="w-[100px] px-2">{{ item.service }}</p><div class="flex flex-col w-[150px]"><p>{{ dayjs(item.date).toString().slice(0,17) }}</p> <p>{{ item.time }}</p> </div>
+              </div>
+              <div>
+                <button @click="completeAppt(item._id,item.service, item.customer)"  class=" w-full border-[2px] p-2 rounded-2xl bg-white hover:cursor-pointer">Completed ?</button>
+              </div>
+              
+              
+              </li>
         </ul>
+        </div>
+        
+        
 
       </div>
+     
     </div>
   </div>
 </template>

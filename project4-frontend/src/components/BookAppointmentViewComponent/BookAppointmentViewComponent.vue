@@ -173,7 +173,7 @@ async function checkAppointments(date) {
 
 <template>
     <div class="flex h-[800px] flex-col justify-center items-center p-2">
-        <div class="w-[80%] max-w-[300px] bg-white p-5 shadow-2xl rounded-2xl">
+        <div class="w-[80%] max-w-[500px] bg-white p-5 shadow-2xl rounded-2xl">
             <form @submit.prevent="handleSubmitAppointment" class="flex flex-col">
             <label for="fullName">name: </label>
             <input v-model="formData.fullName" id="fullName" name="fullName" type="text" class="bg-white border-black border-[2px]"></input>
@@ -202,7 +202,7 @@ async function checkAppointments(date) {
             </select>
 
             <label for="comments">Additional Comments?</label>
-            <textarea id="comments" name="comments" v-model="formData.comments" class="bg-white border-black border-[2px]"></textarea>
+            <textarea id="comments" name="comments" rows="5" v-model="formData.comments" class="bg-white border-black border-[2px]"></textarea>
 
             <button type="submit" class="bg-white border-black border-[2px] mt-2 rounded-2xl hover:bg-brown active:bg-amber-800">Book Appointment</button>
         </form>

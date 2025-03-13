@@ -14,6 +14,22 @@ async function viewSingleUser(userId) {
     }
 }
 
+async function updateUser(userID, updatedData) {
+    try {
+        const res = await fetch(`${BASE_URL}/${userID}`, {
+            method: 'PUT',
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify(updatedData),
+          });
+          return  res.json();
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 export {
-    viewSingleUser
+    viewSingleUser,
+    updateUser
 }
