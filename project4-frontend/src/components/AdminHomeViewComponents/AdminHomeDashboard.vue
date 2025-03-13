@@ -129,7 +129,7 @@ async function sendConfirmationEmail(fullName, email, service, date, time) {
 </script>
 <template>
   <div class="w-full md:h-[800px] sm:h-[1200px] flex flex-col items-center">
-    <div class="mt-[120px]">Today's Date: 
+    <div class="mt-[140px]">Today's Date: 
       <p class="font-special text-3xl">{{  dayjs(today).toString().slice(0,17)}}</p>
       
     </div>
