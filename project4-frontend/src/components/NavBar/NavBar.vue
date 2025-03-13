@@ -86,7 +86,7 @@ function handleLogout() {
       <RouterLink to="/auth/login-booking"><p class="py-5">Book Appointment</p></RouterLink>
       <div>
         <RouterLink v-if="!token" to="/auth/login"><p class="p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Login</p ></RouterLink>
-        <RouterLink v-else="token" to="/"><p @click="handleLogout" class="border-[2px] p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Logout</p ></RouterLink>
+        <RouterLink v-else="token" to="/"><p @click="handleLogout" class="p-3  rounded-3xl  hover:shadow-lg hover:shadow-amber-950/50 hover:scale-125">Logout</p ></RouterLink>
       </div>
         
       
