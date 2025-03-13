@@ -1,0 +1,22 @@
+meta {
+  name: update single user
+  type: http
+  seq: 13
+}
+
+put {
+  url: http://localhost:3000/users/:userId
+  body: json
+  auth: none
+}
+
+params:path {
+  userId: 67c98c5c928f66d89ae84c20
+}
+
+body:json {
+  {
+  "points": "50"
+  }
+  
+}
