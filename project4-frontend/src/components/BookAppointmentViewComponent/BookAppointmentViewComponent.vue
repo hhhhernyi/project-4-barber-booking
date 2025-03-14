@@ -17,41 +17,87 @@ const toast = useToast();
 const router = useRouter();
 const token = localStorage.getItem('token');
 const openingHours = [
-    '1030-1100',
-    '1100-1130',
-    '1130-1200',
-    '1200-1230',
-    '1230-1300',
-    '1300-1330',
-    '1330-1400',
-    '1400-1430',
-    '1430-1500',
-    '1500-1530',
-    '1530-1600',
-    '1600-1630',
+    '1030',
+    '1100',
+    '1130',
+    '1200',
+    '1230',
+    '1300',
+    '1330',
+    '1400',
+    '1430',
+    '1500',
+    '1530',
+    '1600',
 ]
 const state = reactive({
     bookedTiming: [],
     
 })
 // Use computed to track available slots
+// const availableSlots = computed(() => {
+//   // Extract times from bookedTiming and filter them out from openingHours
+//   const bookedTimes = state.bookedTiming.map(booking => booking.time);
+//   return openingHours.filter(slot => !bookedTimes.includes(slot));
+// });
 const availableSlots = computed(() => {
-  // Extract times from bookedTiming and filter them out from openingHours
-  const bookedTimes = state.bookedTiming.map(booking => booking.time);
-  return openingHours.filter(slot => !bookedTimes.includes(slot));
+  const selectedService = services.find(s => s.name === formData.service);
+  if (!selectedService) {
+    return [];
+  }
+  const duration = selectedService.duration;
+  const slotInterval = 30;
+
+  const available = [];
+  for (let i = 0; i <= openingHours.length - (duration / slotInterval); i++) {
+    const combinedSlots = [];
+    for (let j = 0; j < duration / slotInterval; j++) {
+      combinedSlots.push(openingHours[i + j]);
+    }
+
+    const allSlotsAvailable = combinedSlots.every(slot => {
+      const isSlotAvailable = !state.bookedTiming.some(booking => {
+        // Convert both dates to ISO date strings for comparison
+        const bookingDate = new Date(booking.date).toISOString().split('T')[0];
+        const formDate = new Date(formData.date).toISOString().split('T')[0];
+
+        return bookingDate === formDate && booking.time.includes(slot);
+      });
+      console.log(
+        'Checking slot:',
+        slot,
+        'Combined slots',
+        combinedSlots,
+        'is available:',
+        isSlotAvailable
+      );
+      return isSlotAvailable;
+    });
+
+    if (allSlotsAvailable) {
+      available.push(openingHours[i]);
+    }
+  }
+  console.log('Available slots:', available);
+  return available;
 });
 
 let bookedTimeSlot=[]
 
 // VARIABLE
 // STATES
+const services = [
+  { name: "cut", duration: 30 },
+  { name: "color", duration: 60 },
+  { name: "treatment", duration: 90 },
+];
 const formData = reactive({
     fullName:"",
     mobileNumber:'',
     email:'',
-    service: '',
+    service: 'cut', //set a default service
     date: Date,
-    time:'',
+    time:[],
     comments:'',
     status: "pending"
 })
@@ -86,6 +132,27 @@ function formatDateISO(date){
     const formattedDate = isoString.split("T")[0];
     return formattedDate;
 };
+function calculateEndTime(startTime, serviceName) {
+  const selectedService = services.find(s => s.name === serviceName);
+  const duration = selectedService.duration;
+  const startHours = parseInt(startTime.slice(0, 2));
+  const startMinutes = parseInt(startTime.slice(2));
+  let totalMinutes = startHours * 60 + startMinutes + duration;
+  const endHours = Math.floor(totalMinutes / 60) % 24;
+  const endMinutes = totalMinutes % 60;
+  const formattedHours = endHours.toString().padStart(2, '0');
+  const formattedMinutes = endMinutes.toString().padStart(2, '0');
+  return `${formattedHours}${formattedMinutes}`;
+}
+
+function updateBookedTimingsAfterBooking(formData) {
+  formData.time.forEach(time => {
+    state.bookedTiming.push({
+      date: formData.date,
+      time: time,
+    });
+  });
+}
 
 // Function to send email using EmailJS
 async function sendConfirmationEmail(formData) {
@@ -117,55 +184,82 @@ async function sendConfirmationEmail(formData) {
 
 
 async function handleSubmitAppointment() {
-    if (
-        !formData.fullName ||
-        !formData.mobileNumber ||
-        !formData.email ||
-        !formData.service ||
-        !formData.date ||
-        !formData.time 
-    ) {
-        toast.error('Please fill up all fields!')
-    } else {
-        try {
-            if (token) {
-                console.log('form data: ', formData)
-                const pendingAppt = await appointmentService.createAppointmentMember(formData);
-                console.log(pendingAppt)
-                toast.success('Appointment is booked! please wait for confirmation');
-                router.push('/')
-                console.log('email confirmation email to: ', formData.email)
-                await sendConfirmationEmail(formData);
-            } else {
-                console.log('form data: ', formData)
-                const pendingAppt = await appointmentService.createAppointmentGuest(formData);
-                console.log(pendingAppt)
-                toast.success('Appointment is booked! please wait for confirmation');
-                router.push('/')
-                console.log('email confirmation email to: ', formData.email)
-                await sendConfirmationEmail(formData);
-            }
-            
-        } catch (error) {
-            console.log('error message: ',error)
-            toast.error('there was an error processing your request')
-        }
+  if (
+    !formData.fullName ||
+    !formData.mobileNumber ||
+    !formData.email ||
+    !formData.service ||
+    !formData.date ||
+    !formData.time
+  ) {
+    toast.error('Please fill up all fields!');
+  } else {
+    try {
+        // Populate formData.time array
+      formData.time = generateTimeSlotsArray(formData.time[0]); // Use the starting time
+
+
+      if (token) {
+        console.log('form data: ', formData);
+        const pendingAppt = await appointmentService.createAppointmentMember(formData);
+        console.log(pendingAppt);
+        toast.success('Appointment is booked! please wait for confirmation');
+        router.push('/');
+        console.log('email confirmation email to: ', formData.email);
+        await sendConfirmationEmail(formData);
+      } else {
+        console.log('form data: ', formData);
+        const pendingAppt = await appointmentService.createAppointmentGuest(formData);
+        console.log(pendingAppt);
+        toast.success('Appointment is booked! please wait for confirmation');
+        router.push('/');
+        console.log('email confirmation email to: ', formData.email);
+        await sendConfirmationEmail(formData);
+      }
+
+      // Update bookedTiming after successful booking
+      updateBookedTimingsAfterBooking(formData);
+
+    } catch (error) {
+      console.log('error message: ', error);
+      toast.error('there was an error processing your request');
     }
+  }
+}
+function generateTimeSlotsArray(startTime) {
+  const selectedService = services.find(s => s.name === formData.service);
+  const duration = selectedService.duration;
+  const slotInterval = 30;
+  const startIndex = openingHours.indexOf(startTime);
+
+  if (startIndex === -1) {
+    console.error('Start time not found in opening hours');
+    return [];
+  }
+
+  const timeSlotsArray = [];
+  for (let i = 0; i < duration / slotInterval; i++) {
+    timeSlotsArray.push(openingHours[startIndex + i]);
+  }
+  return timeSlotsArray;
 }
 
 async function checkAppointments(date) {
-    try {
-        // send a request to backend to check 
-        const response = await appointmentService.viewAppointmentsForADay(date)
-        console.log('response: ',response)
-         state.bookedTiming = response
-        console.log('booked Timing: ', state.bookedTiming.length)
+  try {
+    const response = await appointmentService.viewAppointmentsForADay(date);
+    console.log('response: ', response);
 
-    } catch (error) {
-        console.log(error)
+    const flattenedBookings = response.flatMap(booking =>
+      booking.time.map(time => ({ ...booking, time }))
+    );
 
-    
-    }
+    state.bookedTiming = flattenedBookings;
+    console.log('booked Timing: ', state.bookedTiming.length);
+    console.log('Flattened Bookings:', state.bookedTiming); // Add this line!
+
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 
@@ -176,7 +270,7 @@ async function checkAppointments(date) {
         <div class="w-[80%] max-w-[500px] bg-white p-5 shadow-2xl rounded-2xl">
             <form @submit.prevent="handleSubmitAppointment" class="flex flex-col">
             <label for="fullName">name: </label>
-            <input v-model="formData.fullName" id="fullName" name="fullName" type="text" class="bg-white border-black border-[2px]"></input>
+            <input v-model="formData.fullName" id="fullName" name="fullName" type="text" class="bg-white border-black border-[2px] rounded-2xl"></input>
 
             <label for="mobileNumber">mobile number: </label>
             <input v-model="formData.mobileNumber" id="mobileNumber" name="mobileNumber" type="tel" class="bg-white border-black border-[2px]"></input>
@@ -186,9 +280,9 @@ async function checkAppointments(date) {
 
             <label for="service" >service: </label>
             <select v-model="formData.service" id="service" name="service" class="bg-white border-black border-[2px]">
-                <option value="cut">Cut</option>
-                <option value="color">color</option>
-                <option value="treatment">treatment</option>
+                <option value="cut">Cut (30 mins)</option>
+                <option value="color">Color (60mins)</option>
+                <option value="treatment">Treatment (90mins)</option>
             </select>
 
             <label for="date">date: </label>
@@ -197,9 +291,11 @@ async function checkAppointments(date) {
             
 
             <label for="time">time: </label>
-            <select v-model="formData.time" id="time" name="time" class="bg-white border-black border-[2px]">
-                <option v-for="time in availableSlots" :name="time">{{ time }}</option>
-            </select>
+    <select v-model="formData.time[0]" id="time" name="time" class="bg-white border-black border-[2px]">
+      <option v-for="time in availableSlots" :key="time" :value="time">
+        {{ time }} - {{ calculateEndTime(time, formData.service) }}
+      </option>
+    </select>
 
             <label for="comments">Additional Comments?</label>
             <textarea id="comments" name="comments" rows="5" v-model="formData.comments" class="bg-white border-black border-[2px]"></textarea>

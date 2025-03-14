@@ -43,7 +43,7 @@ function handleLogout() {
 
 <template>
   <div
-    class="flex w-full max-w-[2000px] border-[2px] h-[130px]  mx-auto z-1 rounded-b-xl justify-around items-center bg-brown border-brown text-white fixed right-0 left-0"
+    class="flex w-full max-w-[2000px] border-[2px] h-[130px]  mx-auto z-10 rounded-b-xl justify-around items-center bg-brown border-brown text-white fixed right-0 left-0"
   >
     <div><RouterLink to="/"><img src="../../assets/images/logo.png" class="rounded-[30%] h-[80px] w-[80px]"/></RouterLink></div>
     <div class="flex justify-around w-[70%] sm:hidden md:flex">

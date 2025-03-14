@@ -52,6 +52,22 @@ async function confirmAppt(itemID, fullName, email, service, date, time) {
       console.log(error)
     }
 }
+async function cancelAppt(itemID, fullName, email, service, date, time) {
+    console.log('appointment confirmed for: ', itemID)
+    console.log('Email sent to: ', email)
+    try {
+      const updatedAppoinmentStatus = await appointmentService.confirmPendingAppointment(itemID)
+      console.log("updated: ", updatedAppoinmentStatus)
+      confirmedAppointment.value = await appointmentService.viewConfirmedAppointments();
+      pendingAppointment.value = await appointmentService.viewPendingAppointments();
+      const emailResponse = await sendConfirmationEmail(fullName, email, service, date, time);
+      console.log('email response: ', emailResponse)
+      toast.success('Appointment confirmed')
+
+    } catch (error) {
+      console.log(error)
+    }
+}
 async function getCustomerDetails(customerID) {
   try {
     const customerData = await userService.viewSingleUser(customerID)
@@ -146,10 +162,11 @@ async function sendConfirmationEmail(fullName, email, service, date, time) {
           <ul>
             <li v-for="item in pendingAppointment" class="flex flex-col justify-items-end">
               <div class="flex items-center my-2">
-                <p class="w-[80px] px-2">{{ item.fullName }}</p> <p class="w-[100px] px-2">{{ item.service }}</p><div class="flex flex-col w-[150px]"><p>{{ dayjs(item.date).toString().slice(0,17) }}</p> <p>{{ item.time }}</p> </div>
+                <p class="w-[80px] px-2">{{ item.fullName }}</p> <p class="w-[100px] px-2">{{ item.service }}</p><div class="flex flex-col w-[150px]"><p>{{ dayjs(item.date).toString().slice(0,17) }}</p> <p>{{ item.time[0] }}</p> </div>
               </div>
               <div>
-                <button @click="confirmAppt(item._id, item.fullName, item.email, item.service, item.date, item.time)"  class=" w-full border-[2px] p-2 rounded-2xl bg-white hover:cursor-pointer">Confirm ?</button>
+                <button @click="confirmAppt(item._id, item.fullName, item.email, item.service, item.date, item.time)"  class=" w-[50%] border-[2px] p-2 rounded-2xl bg-successGreen hover:cursor-pointer">Confirm ?</button>
+                <button @click="cancelAppt(item._id, item.fullName, item.email, item.service, item.date, item.time)"  class=" w-[50%] border-[2px] p-2 rounded-2xl bg-red hover:cursor-pointer">Cancel ?</button>
               </div>
               
               
@@ -173,7 +190,7 @@ async function sendConfirmationEmail(fullName, email, service, date, time) {
           <ul>
             <li v-for="item in confirmedAppointment" class="flex flex-col justify-items-end">
               <div class="flex items-center my-2">
-                <p class="w-[80px] px-2">{{ item.fullName }}</p> <p class="w-[100px] px-2">{{ item.service }}</p><div class="flex flex-col w-[150px]"><p>{{ dayjs(item.date).toString().slice(0,17) }}</p> <p>{{ item.time }}</p> </div>
+                <p class="w-[80px] px-2">{{ item.fullName }}</p> <p class="w-[100px] px-2">{{ item.service }}</p><div class="flex flex-col w-[150px]"><p>{{ dayjs(item.date).toString().slice(0,17) }}</p> <p>{{ item.time[0] }}</p> </div>
               </div>
               <div>
                 <button @click="completeAppt(item._id,item.service, item.customer)"  class=" w-full border-[2px] p-2 rounded-2xl bg-white hover:cursor-pointer">Completed ?</button>

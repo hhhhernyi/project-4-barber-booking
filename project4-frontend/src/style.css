@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 @import "tailwindcss-animated";
 @import 'primeicons/primeicons.css';
@@ -15,6 +16,7 @@
   --color-brown: #A4907C;
   --color-lightBrown: #F1DEC9;
   --color-mediumBrown: #C8B6A6;
+  --color-mediumDarkBrown: #87694a;
   --color-darkBrown: #69441D;
   --color-black: #1e1917;
   --color-white: #ffffff;
@@ -34,6 +36,7 @@
   --font-body: Josefin Sans, sans-serif; 
   --font-special: Nunito, sans-serif; 
   --font-poppins: Poppins, sans-serif;
+  --font-montserrat: Montserrat, sans-serif;
   --shadow-cyanShadow: 0px 0px 20px 0px rgba(94,206,220,0.5);
   --shadow-cyanMediumShadow: 10px 10px 200px 150px rgba(94,286,220,0.5);
   --shadow-orangeMediumShadow: 10px 10px 200px 150px rgba(240,169,79,0.5);

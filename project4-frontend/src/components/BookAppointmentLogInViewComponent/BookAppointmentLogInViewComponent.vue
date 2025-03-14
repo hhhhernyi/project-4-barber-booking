@@ -34,7 +34,7 @@ async function handleSubmitSignin() {
 
 <template>
     <div class="w-full h-[700px] flex justify-center items-center">
-        <div class="border-[2px] w-[80%] max-w-[400px] h-[400px] flex justify-center items-center rounded-2xl shadow-2xl bg-white">
+        <div class="shadow-2xl w-[80%] max-w-[400px] h-[400px] flex justify-center items-center rounded-2xl shadow-2xl bg-white">
         <form @submit.prevent="handleSubmitSignUp" class="flex flex-col w-[90%]">
             <label for="email">Email: </label>
             <input id="email" name="email" v-model="formData.email" type="email" placeholder="Email" class="bg-white border-[2px] px-2"></input><br/>
