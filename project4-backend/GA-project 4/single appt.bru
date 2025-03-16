@@ -1,0 +1,24 @@
+meta {
+  name: single appt
+  type: http
+  seq: 14
+}
+
+get {
+  url: http://localhost:3000/appointment/:appointmentId
+  body: json
+  auth: none
+}
+
+params:path {
+  appointmentId: 67c9875c928f66d89ae84c1b
+}
+
+body:json {
+  {
+  "fullName": "LHR",
+  "review": "i had a bad experience with this studio today",
+    "stars": 1
+  }
+  
+}

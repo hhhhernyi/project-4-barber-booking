@@ -83,4 +83,14 @@ router.post("/guest", async (req, res) => {
     }
   });
 
+  router.get("/:appointmentId", async (req, res) => {
+    try {
+      const appointmentId = req.params.appointmentId
+      const apptDetails = await Appointment.findById(appointmentId); 
+      res.status(200).json(apptDetails);
+    } catch (err) {
+      res.status(500).json({ err: err.message });
+    }
+  });
+
   module.exports = router;

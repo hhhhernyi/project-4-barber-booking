@@ -19,7 +19,7 @@ const appointmentSchema = new mongoose.Schema(
       required: true,
     },
     time:{
-        type: String,
+        type: [],
         required: true,
     },
     service: {
