@@ -35,7 +35,6 @@
     "vue3-carousel": "^0.14.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.3",
     "@vitejs/plugin-vue": "^5.2.1",
     "autoprefixer": "^10.4.20",
     "naive-ui": "^2.41.0",
