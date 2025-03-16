@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
       //req.body.customer = req.user._id; // req.user comes from the verify token method. we are saving the user id (user who is logged in) to be the agent (req.body.agent) that creates the cclients
       const allReviews = await Review.find(); // find all reviews
       //newReview._doc.customer = req.user;
-      res.status(201).json(allReviews);
+      res.status(200).json(allReviews);
     } catch (err) {
       res.status(500).json({ err: err.message });
     }

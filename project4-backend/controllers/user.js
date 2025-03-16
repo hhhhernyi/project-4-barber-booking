@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
     try {
       const userID = req.params.userId
       const oneUser = await User.findById(userID); 
-      res.status(201).json(oneUser);
+      res.status(200).json(oneUser);
     } catch (err) {
       res.status(500).json({ err: err.message });
     }

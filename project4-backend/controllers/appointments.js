@@ -34,7 +34,7 @@ router.post("/guest", async (req, res) => {
   router.get("/pending", async (req, res) => {
     try {
       const allPendingAppointments = await Appointment.find({status: "pending"}); 
-      res.status(201).json(allPendingAppointments);
+      res.status(200).json(allPendingAppointments);
     } catch (err) {
       res.status(500).json({ err: err.message });
     }
@@ -43,7 +43,7 @@ router.post("/guest", async (req, res) => {
   router.get("/confirmed", async (req, res) => {
     try {
       const allConfirmedAppointments = await Appointment.find({status: "confirmed"}); 
-      res.status(201).json(allConfirmedAppointments);
+      res.status(200).json(allConfirmedAppointments);
     } catch (err) {
       res.status(500).json({ err: err.message });
     }
@@ -77,7 +77,7 @@ router.post("/guest", async (req, res) => {
     try {
       const apptDate = req.params.date
       const allPendingAppointments = await Appointment.find({date: apptDate}); 
-      res.status(201).json(allPendingAppointments);
+      res.status(200).json(allPendingAppointments);
     } catch (err) {
       res.status(500).json({ err: err.message });
     }
