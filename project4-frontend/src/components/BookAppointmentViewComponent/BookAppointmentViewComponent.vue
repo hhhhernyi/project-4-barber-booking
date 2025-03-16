@@ -266,41 +266,41 @@ async function checkAppointments(date) {
 </script>
 
 <template>
-    <div class="flex h-[800px] flex-col justify-center items-center p-2">
-        <div class="w-[80%] max-w-[500px] bg-white p-5 shadow-2xl rounded-2xl">
+    <div class="flex h-[800px] flex-col justify-center items-center p-2 ">
+        <div class="w-[80%] max-w-[500px] bg-white p-5 shadow-2xl rounded-2xl mt-20">
             <form @submit.prevent="handleSubmitAppointment" class="flex flex-col">
-            <label for="fullName">name: </label>
-            <input v-model="formData.fullName" id="fullName" name="fullName" type="text" class="bg-white border-black border-[2px] rounded-2xl"></input>
+            <label for="fullName">Name: </label>
+            <input v-model="formData.fullName" id="fullName" name="fullName" type="text" class="bg-white border-gray-400 border-[2px] rounded-2xl px-2"></input>
 
-            <label for="mobileNumber">mobile number: </label>
-            <input v-model="formData.mobileNumber" id="mobileNumber" name="mobileNumber" type="tel" class="bg-white border-black border-[2px]"></input>
+            <label for="mobileNumber">Mobile Number: </label>
+            <input v-model="formData.mobileNumber" id="mobileNumber" name="mobileNumber" type="tel" class="bg-white border-gray-400 border-[2px] rounded-2xl px-2"></input>
 
             <label for="email">Email: </label>
-            <input v-model="formData.email" id="email" name="email" type="email" class="bg-white border-black border-[2px]"></input>
+            <input v-model="formData.email" id="email" name="email" type="email" class="bg-white border-gray-400 border-[2px] rounded-2xl px-2"></input>
 
-            <label for="service" >service: </label>
-            <select v-model="formData.service" id="service" name="service" class="bg-white border-black border-[2px]">
+            <label for="service" >Service: </label>
+            <select v-model="formData.service" id="service" name="service" class="bg-white border-gray-400 border-[2px] rounded-2xl px-2">
                 <option value="cut">Cut (30 mins)</option>
                 <option value="color">Color (60mins)</option>
                 <option value="treatment">Treatment (90mins)</option>
             </select>
 
-            <label for="date">date: </label>
-            <input v-model="formData.date" id="date" name="date" type="date" :min="today" class="bg-white border-black border-[2px]"></input>
+            <label for="date">Date: </label>
+            <input v-model="formData.date" id="date" name="date" type="date" :min="today" class="bg-white border-gray-400 border-[2px] rounded-2xl px-2"></input>
 
             
 
-            <label for="time">time: </label>
-    <select v-model="formData.time[0]" id="time" name="time" class="bg-white border-black border-[2px]">
-      <option v-for="time in availableSlots" :key="time" :value="time">
-        {{ time }} - {{ calculateEndTime(time, formData.service) }}
-      </option>
-    </select>
+            <label for="time">Time: </label>
+            <select v-model="formData.time[0]" id="time" name="time" class="bg-white border-gray-400 border-[2px] rounded-2xl px-2">
+             <option v-for="time in availableSlots" :key="time" :value="time">
+                {{ time }} - {{ calculateEndTime(time, formData.service) }}
+            </option>
+            </select>
 
             <label for="comments">Additional Comments?</label>
-            <textarea id="comments" name="comments" rows="5" v-model="formData.comments" class="bg-white border-black border-[2px]"></textarea>
+            <textarea id="comments" name="comments" rows="5" v-model="formData.comments" class="bg-white border-gray-400 border-[2px] rounded-xl px-2"></textarea>
 
-            <button type="submit" class="bg-white border-black border-[2px] mt-2 rounded-2xl hover:bg-brown active:bg-amber-800">Book Appointment</button>
+            <button type="submit" class="h-[60px] border-gray-400 border-[2px] mt-2 rounded-2xl bg-successGreen hover:bg-green-500 ">Book Appointment</button>
         </form>
         </div>
         

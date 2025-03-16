@@ -22,7 +22,7 @@ import { RouterLink } from 'vue-router';
             
             <div class="flex flex-col items-center">
                 <div class="text-3xl">Cut</div>
-                <div class="text-sm w-[65%] font-poppins">Freshen up your look with a precision haircut tailored to suit your personal style. Whether you're going for a classic cut or something modern, our expert barbers take the time to craft a haircut that complements your features and leaves you feeling sharp and confident. From fades to buzz cuts, we’ve got you covered!</div>
+                <div class="text-sm lg:w-[65%] md:w-[full] font-poppins">Freshen up your look with a precision haircut tailored to suit your personal style. Whether you're going for a classic cut or something modern, our expert barbers take the time to craft a haircut that complements your features and leaves you feeling sharp and confident. From fades to buzz cuts, we’ve got you covered!</div>
             </div>
         </div>
 
@@ -32,7 +32,7 @@ import { RouterLink } from 'vue-router';
             
             <div class="flex flex-col items-center">
                 <div class="text-3xl">Color</div>
-                <div class="text-sm w-[65%] font-poppins">Add some color to your life with a hair coloring service designed just for you. Whether you're looking to brighten up your natural shade, go bold with a new hue, or add some highlights for dimension, our color experts will create a look that enhances your style and gives you that refreshed, vibrant appearance.</div>
+                <div class="text-sm lg:w-[65%] md:w-[full] font-poppins">Add some color to your life with a hair coloring service designed just for you. Whether you're looking to brighten up your natural shade, go bold with a new hue, or add some highlights for dimension, our color experts will create a look that enhances your style and gives you that refreshed, vibrant appearance.</div>
             </div>
         </div>
 
@@ -42,7 +42,7 @@ import { RouterLink } from 'vue-router';
             
             <div class="flex flex-col items-center">
                 <div class="text-3xl">Perm</div>
-                <div class="text-sm w-[65%] font-poppins">Get those gorgeous curls or waves with our perming service! If you're looking to add volume, texture, or curl to your hair, our stylists use advanced perming techniques to create lasting results.We’ll work with you to achieve the perfect look that’s full of life and movement.</div>
+                <div class="text-sm lg:w-[65%] md:w-[full] font-poppins">Get those gorgeous curls or waves with our perming service! If you're looking to add volume, texture, or curl to your hair, our stylists use advanced perming techniques to create lasting results.We’ll work with you to achieve the perfect look that’s full of life and movement.</div>
             </div>
         </div>
 
@@ -52,7 +52,7 @@ import { RouterLink } from 'vue-router';
            
             <div class="flex flex-col items-center">
                 <div class="text-3xl">Treatment</div>
-                <div class="text-sm w-[65%] font-poppins">Nourish and rejuvenate your hair with a luxurious hair treatment. From deep conditioning to restoring shine and softness, our treatments are designed to  revitalize your hair, leaving it healthier and more manageable. Perfect for dry, damaged, or color-treated hair.</div>
+                <div class="text-sm lg:w-[65%] md:w-[full] font-poppins">Nourish and rejuvenate your hair with a luxurious hair treatment. From deep conditioning to restoring shine and softness, our treatments are designed to  revitalize your hair, leaving it healthier and more manageable. Perfect for dry, damaged, or color-treated hair.</div>
             </div>
         </div>
 

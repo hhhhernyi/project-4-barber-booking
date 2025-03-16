@@ -10,6 +10,7 @@ import test from "../components/test/test.vue";
 import AdminHomeView from "../Views/AdminHomeView.vue";
 import MemberHomeView from "../Views/MemberHomeView.vue";
 import ReviewView from "../Views/ReviewView.vue";
+import SingleAppointmentView from "../Views/SingleAppointmentView.vue";
 
 const router = createRouter(
     {
@@ -71,6 +72,12 @@ const router = createRouter(
                 path:'/reviews/new',
                 name: 'reviewsFrorm',
                 component: ReviewView,
+                meta: { requiresAuth: true },
+            },
+            {
+                path:'/appointments/:appointmentId',
+                name: 'apptDetails',
+                component: SingleAppointmentView,
                 meta: { requiresAuth: true },
             },
         ],

@@ -37,7 +37,7 @@ function generateStars (rating) {
 </script>
 
 <template>
-  <div class="w-full h-[400px] flex flex-col justify-center my-2 ">
+  <div class="w-full h-[400px] flex flex-col justify-center my-2 bg-mediumDarkBrown">
   <Carousel v-bind="config" >
     <Slide v-for="item in state.allReviews" :key="slide">
       <div class="carousel__item w-[200px] h-[200px] flex flex-col justify-center items-center p-3 bg-white rounded-2xl overflow-hidden border-darkBrown">

@@ -3,16 +3,16 @@ import { RouterLink } from 'vue-router';
 </script>
 
 <template>
-  <div class="grid grid-cols-2 h-[800px]">
+  <div class="grid grid-cols-1 md:grid-cols-2 h-auto md:h-[800px]">
     <div
-      class="bg-[url('/images/heroBG.png')] bg-cover bg-center rounded-r-[15%]"
+      class="bg-[url('/images/heroBG.png')] bg-cover bg-center rounded-b-[15%] md:rounded-r-[15%] h-[400px] md:h-full"
     ></div>
-    <div class="flex flex-col justify-center items-center">
-      <div class="text-darkBrown text-2xl flex flex-col items-center">
-        <h1 class="md:text-6xl sm:text-3xl font-montserrat">20 YEARS</h1>
-        <h2 class="text-sm md:text-4xl font-montserrat">IN PROFESSIONAL HAIR SERVICES</h2>
+    <div class="flex flex-col justify-center items-center p-4">
+      <div class="text-darkBrown text-center">
+        <h1 class="text-3xl md:text-6xl font-montserrat">20 YEARS</h1>
+        <h2 class="text-lg md:text-4xl font-montserrat">IN PROFESSIONAL HAIR SERVICES</h2>
       </div>
-      <div class="mt-5 flex sm:flex-col md:flex-row justify-center items-center">
+      <div class="mt-5 flex flex-col sm:flex-row justify-center items-center">
         <RouterLink to="/services">
           <button
             class="border-[2px] border-brown m-3 p-2 rounded-2xl bg-brown text-white cursor-pointer hover:scale-125"

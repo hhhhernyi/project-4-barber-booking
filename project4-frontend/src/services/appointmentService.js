@@ -103,6 +103,20 @@ async function viewAppointmentsForADay(date) {
         console.log(err);
     }
 }
+
+// View a single appointment
+async function viewSingleAppointment(apptId) {
+    try {
+        const res = await fetch(BASE_URL+`/${apptId}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+         }
+          });
+          return  res.json();
+    } catch (err) {
+        console.log(err);
+    }
+}
 export {
     createAppointmentGuest,
     createAppointmentMember,
@@ -110,5 +124,6 @@ export {
     viewConfirmedAppointments,
     confirmPendingAppointment,
     viewAppointmentsForADay,
-    completeAppointment
+    completeAppointment,
+    viewSingleAppointment
   };

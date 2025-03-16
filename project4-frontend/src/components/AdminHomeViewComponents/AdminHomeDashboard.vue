@@ -1,7 +1,7 @@
 <script setup>
 // IMPORT
 import { onMounted, ref } from "vue";
-import ConfirmPopup from 'primevue/confirmpopup';
+import { RouterLink } from "vue-router";
 import * as appointmentService from "../../services/appointmentService";
 import * as userService from '../../services/user'
 import { useConfirm } from "primevue/useconfirm";
@@ -95,8 +95,6 @@ if (customer ) {
   } else if (service === 'treatment') {
     addedPoints = 100
   }
-  //newPoints = customerPoints + points
-  // get a service to update the customer profile
   console.log(`${addedPoints} points added to:` , customer)
   let newPoints = customerPoints+ addedPoints
   let updateData = {"points": newPoints}
@@ -151,24 +149,24 @@ async function sendConfirmationEmail(fullName, email, service, date, time) {
     </div>
     <div class="flex mt-[50px] sm:flex-col md:flex-row space-around justify-center items-center">
       <!-- display all pending appointments here -->
-      <div class="border-[2px] m-2 sm:w-[80%] sm:h-[400px] md:w-[70%] md:h-[500px] p-2 bg-brown rounded-xl">
+      <div class="border-[2px] m-2 sm:w-[80%] sm:h-[400px] md:w-[40vw] md:h-[500px] p-2 bg-brown rounded-xl">
         <h2 class="mx-auto text-center text-2xl underline font-poppins">Pending Appointments</h2>
         <section class="flex border-[2px] border-darkBrown bg-darkBrown text-white px-2">
         <p class="w-[80px]">Name: </p>
         <p class="w-[100px]">Service: </p>
         <p class="w-[150px]">Date and time:</p>
         </section>
-        <div class="md:h-[430px] sm:h-[330px] overflow-auto ">
+        <div class="md:h-[410px] sm:h-[310px] overflow-auto border-[2px] rounded-2xl my-2 p-2">
           <ul>
             <li v-for="item in pendingAppointment" class="flex flex-col justify-items-end">
               <div class="flex items-center my-2">
                 <p class="w-[80px] px-2">{{ item.fullName }}</p> <p class="w-[100px] px-2">{{ item.service }}</p><div class="flex flex-col w-[150px]"><p>{{ dayjs(item.date).toString().slice(0,17) }}</p> <p>{{ item.time[0] }}</p> </div>
               </div>
               <div>
-                <button @click="confirmAppt(item._id, item.fullName, item.email, item.service, item.date, item.time)"  class=" w-[50%] border-[2px] p-2 rounded-2xl bg-successGreen hover:cursor-pointer">Confirm ?</button>
-                <button @click="cancelAppt(item._id, item.fullName, item.email, item.service, item.date, item.time)"  class=" w-[50%] border-[2px] p-2 rounded-2xl bg-red hover:cursor-pointer">Cancel ?</button>
+                <button @click="confirmAppt(item._id, item.fullName, item.email, item.service, item.date, item.time)"  class=" w-[30%] border-[2px] p-2 rounded-2xl bg-successGreen hover:cursor-pointer mx-1">Confirm</button>
+                <button @click="cancelAppt(item._id, item.fullName, item.email, item.service, item.date, item.time)"  class=" w-[30%] border-[2px] p-2 rounded-2xl bg-red hover:cursor-pointer mx-1">Cancel</button>
+                <RouterLink :to="'/appointments/' + item._id" ><button  class=" w-[30%] border-[2px] p-2 rounded-2xl bg-lightBrown hover:cursor-pointer mx-1">View</button></RouterLink>
               </div>
-              
               
               </li>
         </ul>
@@ -179,14 +177,14 @@ async function sendConfirmationEmail(fullName, email, service, date, time) {
       </div>
 
       <!-- display all confirmed appointments here -->
-      <div class="border-[2px] m-2 sm:w-[80%] sm:h-[400px] md:w-[70%] md:h-[500px] p-2 bg-brown rounded-xl">
+      <div class="border-[2px] m-2 sm:w-[80%] sm:h-[400px] md:w-[40vw] md:h-[500px] p-2 bg-brown rounded-xl">
         <h2 class="mx-auto text-center text-2xl underline font-poppins">Confirmed Appointments</h2>
         <section class="flex border-[2px] border-darkBrown bg-darkBrown text-white px-2">
         <p class="w-[80px]">Name: </p>
         <p class="w-[100px]">Service: </p>
         <p class="w-[150px]">Date and time:</p>
         </section>
-        <div class="md:h-[430px] sm:h-[330px] overflow-auto ">
+        <div class="md:h-[410px] sm:h-[310px] overflow-auto border-[2px] rounded-2xl my-2 p-2">
           <ul>
             <li v-for="item in confirmedAppointment" class="flex flex-col justify-items-end">
               <div class="flex items-center my-2">
