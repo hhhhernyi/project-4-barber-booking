@@ -30,16 +30,17 @@ async function handleSubmitSignUp() {
         toast.success('Account created successfully!')
         router.push('/auth/login')
     } else {
-        toast.error('passwords do not match')
+        toast.error('passwords do not match or do not match requirements')
     }
 }
 function validatePassword(pw, cfmPw) {
-    if (pw===cfmPw) {
-        return true
-    } else {
-        return false
-    }
+  if (pw !== cfmPw) {
+    return false; // Passwords don't match
+  }
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  return regex.test(pw);
 }
+
 
 </script>
 

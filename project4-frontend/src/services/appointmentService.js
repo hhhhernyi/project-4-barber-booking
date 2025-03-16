@@ -74,6 +74,21 @@ async function confirmPendingAppointment(appointmentId) {
         console.log(err);
     }
 }
+// cancel a pending appointment
+async function cancelPendingAppointment(appointmentId) {
+    try {
+        const res = await fetch(BASE_URL+`/pending/${appointmentId}`, {
+            method: 'PUT',
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({ status: "cancelled" }),
+          });
+          return  res.json();
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 // complete an appointment
 async function completeAppointment(appointmentId) {
@@ -123,6 +138,7 @@ export {
     viewPendingAppointments,
     viewConfirmedAppointments,
     confirmPendingAppointment,
+    cancelPendingAppointment,
     viewAppointmentsForADay,
     completeAppointment,
     viewSingleAppointment
