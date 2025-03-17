@@ -10,10 +10,7 @@ import * as appointmentService from '../../services/appointmentService';
 import emailjs from "@emailjs/browser";
 
 // CONSTANTS
-const SERVICE_ID = import.meta.env.VITE_EMAIL_TEMPLATE_ID;
-const TEMPLATE_ID = import.meta.env.VITE_SERVICE_ID;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
-
 const date = new Date();
 const today = formatDateISO(date)
 const toast = useToast();
@@ -35,8 +32,9 @@ const openingHours = [
 ]
 
 // Use computed to track available slots
+// when page loads, it is an empty array as formData.service is not selected yet
 const availableSlots = computed(() => {
-  const selectedService = services.find(s => s.name === formData.service);
+  const selectedService = services.find(item => item.name === formData.service);
   if (!selectedService) {
     return [];
   }
@@ -76,21 +74,20 @@ const availableSlots = computed(() => {
   console.log('Available slots:', available);
   return available;
 });
+
+
 const services = [
   { name: "cut", duration: 30 },
   { name: "color", duration: 60 },
   { name: "treatment", duration: 90 },
 ];
 
-
 // VARIABLE
 let bookedTimeSlot=[]
-
 
 // STATES
 const state = reactive({
     bookedTiming: [],
-    
 })
 const formData = reactive({
     fullName:"",
@@ -117,13 +114,12 @@ watch(() => formData.date, (newDate, oldDate) => {
 watch(state,()=>{
     if (state.bookedTiming.length !== bookedTimeSlot.length) {
         for (let i=0; i<state.bookedTiming.length; i++) {
-    bookedTimeSlot.push(state.bookedTiming[i].time)
- }
+        bookedTimeSlot.push(state.bookedTiming[i].time)
+      }
     }
- 
  console.log('appointment timings: ',bookedTimeSlot)
-
 })
+
 // FUNCTION
 function formatDateISO(date){
     // Convert the date to ISO string
@@ -133,7 +129,7 @@ function formatDateISO(date){
     return formattedDate;
 };
 function calculateEndTime(startTime, serviceName) {
-  const selectedService = services.find(s => s.name === serviceName);
+  const selectedService = services.find(item => item.name === serviceName);
   const duration = selectedService.duration;
   const startHours = parseInt(startTime.slice(0, 2));
   const startMinutes = parseInt(startTime.slice(2));
