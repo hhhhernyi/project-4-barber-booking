@@ -75,7 +75,7 @@ function handleLogout() {
     
   </div>
 
-    <div v-show="showSmallNavBar" class="w-[85%] mx-auto border-[2px] flex flex-col items-center bg-mediumBrown opacity-95 rounded-2xl fixed right-0 left-0 top-[140px]">
+    <div v-show="showSmallNavBar" class="w-[85%] mx-auto z-10 border-[2px] flex flex-col items-center bg-mediumBrown opacity-95 rounded-2xl fixed right-0 left-0 top-[140px]">
       <div v-if="token">
         <div v-if="adminStatus===true"><RouterLink to="/admin/home"><p class="py-5">Admin</p ></RouterLink></div>
         <div v-else-if="adminStatus===false"><RouterLink to="/member/home"><p class="py-5">Member</p ></RouterLink></div>
