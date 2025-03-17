@@ -7,7 +7,7 @@ import { RouterLink } from 'vue-router';
     <div class="font-montserrat">
       <div>Your Perfect Cut Awaits </div>
       <div> Experience the Best in Grooming!</div>
-      <div><RouterLink to="/auth/login-booking"><button class="text-white p-3 bg-darkBrown rounded-xl">Book Appointment Now</button></RouterLink></div>
+      <div><RouterLink to="/auth/login-booking"><button class="text-white p-3 bg-darkBrown rounded-xl cursor-pointer hover:bg-amber-800">Book Appointment Now</button></RouterLink></div>
     </div>
     <div class="h-[30%] w-[50%]flex justify-center items-center">
       <iframe 

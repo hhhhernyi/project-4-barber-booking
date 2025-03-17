@@ -85,13 +85,13 @@ if (customer ) {
   let customerPoints = customerDetails.points
   console.log('customerpoints: ', customerPoints)
   if (service === 'cut') {
-    addedPoints=7
+    addedPoints=10
   } else if (service==='color') {
-    addedPoints=30
+    addedPoints=60
   } else if (service === 'perm') {
-    addedPoints = 50
+    addedPoints = 70
   } else if (service === 'treatment') {
-    addedPoints = 100
+    addedPoints = 80
   }
   console.log(`${addedPoints} points added to:` , customer)
   let newPoints = customerPoints+ addedPoints

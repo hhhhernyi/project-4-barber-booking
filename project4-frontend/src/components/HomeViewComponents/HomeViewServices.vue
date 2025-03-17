@@ -8,11 +8,11 @@ import { RouterLink } from 'vue-router';
     <div class="flex flex-col items-center text-m md:text-2xl md:flex-row md:mx-10 my-5 animate-fade-up animate-once animate-duration-[900ms] animate-delay-200 animate-ease-out">
         <div class="mx-5 text-darkBrown">SERVICES PROVIDED AT</div>
         <div class="flex bg-black w-auto justify-center p-1 rounded-2xl  ">
-            <p class="text-red m-1">CUT </p>
-            <p class="text-white m-1">. </p>
-            <p class="text-yellow m-1">STYLE </p>
-            <p class="text-white m-1">. </p>
-            <p class="text-blue m-1">PERM</p>
+            <p class="text-red m-1 font-bold">CUT </p>
+            <p class="text-white m-1 font-bold">. </p>
+            <p class="text-yellow m-1 font-bold">STYLE </p>
+            <p class="text-white m-1 font-bold">. </p>
+            <p class="text-blue m-1 font-bold">PERM</p>
         </div>
     </div>
     <div class="flex flex-col lg:flex-row items-center justify-around p-2 my-5">
@@ -28,7 +28,7 @@ import { RouterLink } from 'vue-router';
 
         <div class="flex flex-col md:w-[25%] md:h-[400px] sm:w-[80%] m-2  items-center">
            
-                <img src="../../assets/images/homeServiceColorImage.jpg" alt="Coloring hair" class="rounded-3xl w-[300px] h-[200px] object-cover"/>
+                <img src="../../assets/images/homeServiceColorImage.jpeg" alt="Coloring hair" class="rounded-3xl w-[300px] h-[200px] object-cover"/>
             
             <div class="flex flex-col items-center">
                 <div class="text-3xl">Color</div>
@@ -48,7 +48,7 @@ import { RouterLink } from 'vue-router';
 
         <div class="flex flex-col md:w-[25%] md:h-[400px] sm:w-[80%] m-2  items-center">
             
-                <img src="../../assets/images/homeServiceTreatmentImage.png" alt="treat hair" class="rounded-3xl w-[300px] h-[200px] object-fill"/>
+                <img src="../../assets/images/homeServiceTreatmentImage.jpg" alt="treat hair" class="rounded-3xl w-[300px] h-[200px] object-fill"/>
            
             <div class="flex flex-col items-center">
                 <div class="text-3xl">Treatment</div>

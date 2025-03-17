@@ -1,3 +1,6 @@
+<!-- for this component, i used google Gemini to help me with the construction of advanced booking system with no double booking -->
+<!-- after i am done with the initial version. I have copied the whole chat inside a google docs -->
+
 <script setup>
 // IMPORTS
 import { reactive, watch, computed } from 'vue';
@@ -30,16 +33,8 @@ const openingHours = [
     '1530',
     '1600',
 ]
-const state = reactive({
-    bookedTiming: [],
-    
-})
+
 // Use computed to track available slots
-// const availableSlots = computed(() => {
-//   // Extract times from bookedTiming and filter them out from openingHours
-//   const bookedTimes = state.bookedTiming.map(booking => booking.time);
-//   return openingHours.filter(slot => !bookedTimes.includes(slot));
-// });
 const availableSlots = computed(() => {
   const selectedService = services.find(s => s.name === formData.service);
   if (!selectedService) {
@@ -81,16 +76,22 @@ const availableSlots = computed(() => {
   console.log('Available slots:', available);
   return available;
 });
-
-let bookedTimeSlot=[]
-
-// VARIABLE
-// STATES
 const services = [
   { name: "cut", duration: 30 },
   { name: "color", duration: 60 },
   { name: "treatment", duration: 90 },
 ];
+
+
+// VARIABLE
+let bookedTimeSlot=[]
+
+
+// STATES
+const state = reactive({
+    bookedTiming: [],
+    
+})
 const formData = reactive({
     fullName:"",
     mobileNumber:'',
@@ -101,7 +102,6 @@ const formData = reactive({
     comments:'',
     status: "pending"
 })
-
 
 // watch method is used to run a callback when a reactive state changes, similar to useEffect dependencies
 watch(() => formData.date, (newDate, oldDate) => {
@@ -144,7 +144,6 @@ function calculateEndTime(startTime, serviceName) {
   const formattedMinutes = endMinutes.toString().padStart(2, '0');
   return `${formattedHours}${formattedMinutes}`;
 }
-
 function updateBookedTimingsAfterBooking(formData) {
   formData.time.forEach(time => {
     state.bookedTiming.push({
@@ -153,7 +152,6 @@ function updateBookedTimingsAfterBooking(formData) {
     });
   });
 }
-
 // Function to send email using EmailJS
 async function sendConfirmationEmail(formData) {
     const templateParams = {
@@ -180,9 +178,6 @@ async function sendConfirmationEmail(formData) {
         toast.error('There was an error sending the confirmation email.');
     }
 }
-
-
-
 async function handleSubmitAppointment() {
   if (
     !formData.fullName ||
@@ -243,7 +238,6 @@ function generateTimeSlotsArray(startTime) {
   }
   return timeSlotsArray;
 }
-
 async function checkAppointments(date) {
   try {
     const response = await appointmentService.viewAppointmentsForADay(date);
@@ -261,8 +255,6 @@ async function checkAppointments(date) {
     console.log(error);
   }
 }
-
-
 </script>
 
 <template>

@@ -55,6 +55,6 @@ function generateStars (rating) {
   
    </div>
    <div class="w-full flex justify-center">
-    <button class="p-2 rounded-2xl bg-darkBrown text-white"><RouterLink to="/reviews/new">Leave a review now!</RouterLink></button>
+    <button class="p-2 rounded-2xl bg-darkBrown text-white hover:cursor-pointer hover:bg-amber-800"><RouterLink to="/reviews/new">Leave a review now!</RouterLink></button>
    </div>
 </template>

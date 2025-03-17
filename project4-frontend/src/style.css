@@ -34,6 +34,13 @@
   --color-lightGrey: #978580;
   --color-darkGrey: #3f4441;
   --color-successGreen: #4BB543;
+  --color-off-white: #f5f5f0;
+  --color-brown-600: #795548;
+  --color-brown-800: #5d4037;
+  --color-brown-cta: #a1887f;
+  --color-brown-cta-dark:#8d6e63;
+  --color-light-brown: #efebe9;
+  --color-light-brown-border: #d7ccc8;
   --font-body: Josefin Sans, sans-serif; 
   --font-special: Nunito, sans-serif; 
   --font-poppins: Poppins, sans-serif;
