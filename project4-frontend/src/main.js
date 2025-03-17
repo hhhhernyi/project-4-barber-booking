@@ -9,5 +9,4 @@ import 'vue-toastification/dist/index.css';
 const app = createApp(App)
 app.use(router);
 app.use(toast);
-app.use(Carousel3d);
 app.mount('#app')

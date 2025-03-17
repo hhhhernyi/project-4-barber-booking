@@ -2,7 +2,6 @@
 import { ref } from 'vue';
 import LogInViewComponent from '../components/LogInViewComponents/LogInViewComponent.vue';
 import AdminLogInView from './AdminLogInView.vue';
-import ToggleSwitch from 'primevue/toggleswitch';
 
 const memberLogin = ref(true)
 const adminLogin = ref(false)
