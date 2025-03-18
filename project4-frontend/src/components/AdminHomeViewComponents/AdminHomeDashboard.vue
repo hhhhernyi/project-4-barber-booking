@@ -54,13 +54,13 @@ async function cancelAppt(itemID, fullName, email, service, date, time) {
     console.log('appointment calcelled for: ', itemID)
     console.log('Email sent to: ', email)
     try {
-      const updatedAppoinmentStatus = await appointmentService.cancelPendingAppointment(itemID)
-      console.log("updated: ", updatedAppoinmentStatus)
-      confirmedAppointment.value = await appointmentService.viewConfirmedAppointments();
-      pendingAppointment.value = await appointmentService.viewPendingAppointments();
       const emailResponse = await sendCancellationEmail(fullName, email, service, date, time);
       console.log('email response: ', emailResponse)
       toast.success('Appointment cancelled')
+      const updatedAppoinmentStatus = await appointmentService.deleteAppointment(itemID) 
+      console.log("updated: ", updatedAppoinmentStatus)
+      confirmedAppointment.value = await appointmentService.viewConfirmedAppointments();
+      pendingAppointment.value = await appointmentService.viewPendingAppointments();
 
     } catch (error) {
       console.log(error)
