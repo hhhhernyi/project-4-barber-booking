@@ -6,7 +6,6 @@ import LogInView from "../Views/LogInView.vue";
 import SignUpView from "../Views/SignUpView.vue";
 import AdminLogInView from "../Views/AdminLogInView.vue";
 import BookAppointmentView from "../Views/BookAppointmentView.vue";
-import test from "../components/test/test.vue";
 import AdminHomeView from "../Views/AdminHomeView.vue";
 import MemberHomeView from "../Views/MemberHomeView.vue";
 import ReviewView from "../Views/ReviewView.vue";
@@ -50,11 +49,6 @@ const router = createRouter(
                 path:'/book-appointment',
                 name: 'bookApptPage',
                 component: BookAppointmentView
-            },
-            {
-                path:'/test',
-                name: 'test',
-                component: test
             },
             {
                 path:'/admin/home',
