@@ -93,4 +93,14 @@ router.post("/guest", async (req, res) => {
     }
   });
 
+  router.delete("/:appointmentId", async (req, res) => {
+    try {
+      const appointmentId = req.params.appointmentId
+      const apptDetails = await Appointment.findByIdAndDelete(appointmentId); 
+      res.status(201).json(apptDetails);
+    } catch (err) {
+      res.status(500).json({ err: err.message });
+    }
+  });
+
   module.exports = router;

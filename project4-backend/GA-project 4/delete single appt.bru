@@ -1,0 +1,24 @@
+meta {
+  name: delete single appt
+  type: http
+  seq: 15
+}
+
+delete {
+  url: http://localhost:3000/appointment/:appointmentId
+  body: json
+  auth: none
+}
+
+params:path {
+  appointmentId: 67d43d03a78ee642493bc6d7
+}
+
+body:json {
+  {
+  "fullName": "LHR",
+  "review": "i had a bad experience with this studio today",
+    "stars": 1
+  }
+  
+}
