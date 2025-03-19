@@ -42,16 +42,16 @@ As i wanted to enhance my own learning, i decided to use 2 new frontend tools to
 This capstone project provided me with many learning opportunities. I picked up VueJS and TailwindCSS, which are very popular in the industry now, and also strengthen my knowledge in backend development, especially with authentication and authorization. I also ran into a major problem during the end of the project, where i was trying to integrate a map feature into my app and it caused a huge crash. I had to spend a few days to debug it and costed me a lot of time. Through this, i learnt how to effectively debug my code when a major issue occurs. I initially wanted to use a new language as well, Python, for the backend to connect to MongoDB but after consideration and consulting with the instructor, we concluded that it is better to not be too ambitious and pick up too many new technologies at the same time. 
 
 ## Wireframing
-![wireframe image 1](wireframes\1.jpg)
-![wireframe image 1](wireframes\2.jpg)
-![wireframe image 1](wireframes\3.jpg)
-![wireframe image 1](wireframes\4.jpg)
-![wireframe image 1](wireframes\5.jpg)
-![wireframe image 1](wireframes\6.jpg)
-![wireframe image 1](wireframes\7.jpg)
-![wireframe image 1](wireframes\8.jpg)
-![wireframe image 1](wireframes\9.jpg)
-![wireframe image 1](wireframes\10.jpg)
+![wireframe image 1](./wireframes/1.jpg)
+![wireframe image 2](./wireframes/2.jpg)
+![wireframe image 3](./wireframes/3.jpg)
+![wireframe image 4](./wireframes/4.jpg)
+![wireframe image 5](./wireframes/5.jpg)
+![wireframe image 6](./wireframes/6.jpg)
+![wireframe image 7](./wireframes/7.jpg)
+![wireframe image 8](./wireframes/8.jpg)
+![wireframe image 9](./wireframes/9.jpg)
+![wireframe image 10](./wireframes/10.jpg)
 
 
 ## Stretch Goals
